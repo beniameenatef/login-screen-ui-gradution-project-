@@ -1,6 +1,6 @@
 
 import 'package:design_ui/constant/colors.dart';
-import 'package:design_ui/screens/login.dart';
+import 'package:design_ui/screens/login/login.dart';
 import 'package:design_ui/screens/on%20boarding/classes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -5,7 +5,7 @@ import 'package:design_ui/components/passwordtextform.dart';
 import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/components/custom%20button.dart';
 import 'package:design_ui/components/text%20from.dart';
-import 'package:design_ui/screens/login.dart';
+import 'package:design_ui/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

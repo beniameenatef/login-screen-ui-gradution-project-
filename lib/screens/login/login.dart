@@ -4,14 +4,14 @@ import 'package:design_ui/bloc/states.dart';
 import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/components/custom%20button.dart';
 import 'package:design_ui/components/text%20from.dart';
-import 'package:design_ui/screens/register.dart';
+import 'package:design_ui/screens/login/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../components/passwordtextform.dart';
+import '../../components/passwordtextform.dart';
 
 class loginqualityapp extends StatelessWidget {
 
