@@ -1,10 +1,12 @@
 
 import 'package:design_ui/constant/colors.dart';
-import 'package:design_ui/screens/login/login.dart';
-import 'package:design_ui/screens/on%20boarding/classes.dart';
+import 'package:design_ui/modules/Auth/login/login.dart';
+import 'package:design_ui/modules/on%20boarding/classes.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 
 
 class onBoardingScrean extends StatelessWidget {
