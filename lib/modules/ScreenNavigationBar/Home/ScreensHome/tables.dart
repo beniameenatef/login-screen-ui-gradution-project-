@@ -160,13 +160,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  const Scaffold(
-        body: MyStatelessWidget(),
+        body: Tables(),
       );
   }
 }
 
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key? key}) : super(key: key);
+class Tables extends StatelessWidget {
+  const Tables({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

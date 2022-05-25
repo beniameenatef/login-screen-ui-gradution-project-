@@ -1,6 +1,6 @@
 import 'package:design_ui/bloc/home/homecubit.dart';
 import 'package:design_ui/bloc/home/homestate.dart';
-import 'package:design_ui/drawer/modules/Drawer/drawer.dart';
+import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,45 +45,46 @@ class detailshomePage extends StatelessWidget {
                     width: 20,
                   ),
                 ),
-                Padding(padding: EdgeInsetsDirectional.only(end: 10),child:SizedBox(
-                    width: 250.0,
-                    height: 37,
-                    child: TextField(
-                      onTap: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //       builder: (context) => SearchScreen()),
-                        // );
-                      },
-                      onSubmitted: (value)
-                      {},
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: 'searching',
-                        hintStyle: TextStyle(fontSize: 15, height: 2.7),
-                        // hintText: "Search",
+                Padding(
+                  padding: EdgeInsetsDirectional.only(end: 10),
+                  child: SizedBox(
+                      width: 250.0,
+                      height: 37,
+                      child: TextField(
+                        onTap: () {
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //       builder: (context) => SearchScreen()),
+                          // );
+                        },
+                        onSubmitted: (value) {},
+                        controller: _searchController,
+                        decoration: InputDecoration(
+                          hintText: 'searching',
+                          hintStyle: TextStyle(fontSize: 15, height: 2.7),
+                          // hintText: "Search",
 
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Colors.black,
-                          size: 18,
-                        ),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: Colors.black,
+                            size: 18,
+                          ),
 
-                        suffixIcon: _searchText.isNotEmpty
-                            ? IconButton(
-                          iconSize: 18,
-                          icon: Icon(Icons.clear),
-                          onPressed: () {},
-                        )
-                            : null,
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50.0),
+                          suffixIcon: _searchText.isNotEmpty
+                              ? IconButton(
+                                  iconSize: 18,
+                                  icon: Icon(Icons.clear),
+                                  onPressed: () {},
+                                )
+                              : null,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50.0),
+                            ),
                           ),
                         ),
-                      ),
-                    )),
-                    )
+                      )),
+                )
               ],
             ),
           ),
