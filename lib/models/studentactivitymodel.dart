@@ -4,11 +4,11 @@ class studentactivity {
 
   studentactivity({this.data, this.meta});
 
-  studentactivity.fromJson(Map<String, dynamic> json) {
+  studentactivity.fromJson(Map<String, dynamic> json, List data) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data.add(new Data.fromJson(v));
       });
     }
     meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;

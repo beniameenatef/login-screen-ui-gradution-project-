@@ -1,12 +1,13 @@
 import 'package:design_ui/bloc/home/homestate.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
-import 'package:design_ui/modules/home/detailshome.dart';
-import 'package:design_ui/modules/home/tabbarmenu.dart';
+import 'package:design_ui/modules/TapAppBar/tabbarmenu.dart';
+import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../bloc/home/homecubit.dart';
+import '../bloc/home/homecubit.dart';
 
 class adaretalgouda extends StatelessWidget {
   const adaretalgouda({Key? key}) : super(key: key);

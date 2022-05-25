@@ -1,11 +1,13 @@
 
 import 'package:design_ui/constant/colors.dart';
-import 'package:design_ui/drawer/modules/Auth/login/login.dart';
-import 'package:design_ui/drawer/modules/on%20boarding/classes.dart';
+import 'package:design_ui/modules/login/login.dart';
+import 'package:design_ui/modules/on%20boarding/classes.dart';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 
 
 

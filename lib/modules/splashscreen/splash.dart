@@ -1,8 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:design_ui/constant/colors.dart';
-import 'package:design_ui/drawer/modules/on%20boarding/on%20boarding.dart';
 
 import 'package:flutter/material.dart';
+
+import '../on boarding/on boarding.dart';
 
 class spalshscreen extends StatelessWidget {
   const spalshscreen({Key? key}) : super(key: key);

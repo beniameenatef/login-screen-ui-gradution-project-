@@ -4,7 +4,7 @@ import 'package:design_ui/bloc/home/homestate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'carousselSlider.dart';
+import '../TapAppBar/carousselSlider.dart';
 
 class SelectionScreen extends StatelessWidget {
   const SelectionScreen({Key? key}) : super(key: key);
@@ -51,23 +51,15 @@ class SelectionScreen extends StatelessWidget {
                     fontSize: 17.0,
                     fontWeight: FontWeight.w600),
               ),
-              Text(
-                'feedback',
-                style: TextStyle(
-                    fontFamily: 'Raleway',
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w600),
-              ),
             ],
             views: const [
-              Caroussel(),
               Caroussel(),
               Caroussel(),
               Caroussel(),
             ],
             onChange: (index)
           {
-            cubit.changetapappbar(index);
+            cubit.Homechangetapappbar(index);
 
           },
           ),

@@ -1,7 +1,10 @@
-abstract class qualitystates {}
+abstract class qualityloginstates {}
 
-class qualityInitialState extends qualitystates {}
+class qualityloginInitialState extends qualityloginstates {}
 
 
 
-class visibalSuccessState extends qualitystates {}
+class visibalSuccessState extends qualityloginstates {}
+
+
+class brancheSuccessState extends qualityloginstates {}

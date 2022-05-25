@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-class charts extends StatelessWidget {
-  const charts({Key? key}) : super(key: key);
+class Homecharts extends StatelessWidget {
+  const Homecharts({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

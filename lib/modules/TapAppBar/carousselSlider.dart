@@ -11,7 +11,6 @@ class Caroussel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CarouselController buttonCarouselController = CarouselController();
 
     return BlocConsumer<homecubit,qualityhomestates>
       (listener: (context, state)
@@ -25,28 +24,7 @@ class Caroussel extends StatelessWidget {
             body: cubit.screentabbar[cubit.currnetindextabbar],
           ) ;
 
-          // CarouselSlider(
-          //       carouselController: buttonCarouselController,
-          //       items: const [
-          //         overview(),
-          //         charts(),
-          //         tables(),
-          //         feedback(),
-          //
-          //       ],
-          //       options: CarouselOptions(
-          //         initialPage:0 ,
-          //         onScrolled: (index)
-          //         {
-          //           cubit.currentindex;
-          //         },
-          //           height: 308,
-          //           autoPlay: false,
-          //           enlargeCenterPage: true,
-          //
-          //
-          //       ),
-          //     );
+
     });
   }
 }

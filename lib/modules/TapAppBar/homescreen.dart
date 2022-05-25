@@ -1,5 +1,5 @@
+import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
 import 'package:flutter/material.dart';
-import 'detailshome.dart';
 
 class CategoryHome extends StatefulWidget {
   @override

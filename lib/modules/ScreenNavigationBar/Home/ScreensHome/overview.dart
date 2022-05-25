@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class overview extends StatelessWidget {
-  const overview({Key? key}) : super(key: key);
+class Homeoverview extends StatelessWidget {
+  const Homeoverview({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
