@@ -1,7 +1,7 @@
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/TapAppBar/tabbarmenu.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
-import 'package:design_ui/network/http/http2.dart';
+import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

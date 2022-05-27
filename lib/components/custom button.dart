@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+
+import '../constant/colors.dart';
+import '../constant/colors.dart';
 class DefaultButton extends StatelessWidget {
   final String? text;
   final VoidCallback? onpressed;
-  final Color? color;
+  //final Color? color;
   const DefaultButton({
     Key? key,
     this.text,
-    this.color,
+    //this.color,
     this.onpressed ,
   }) : super(key: key);
 
@@ -14,7 +17,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(width: 300,height: 52,
       child:MaterialButton(
-        color: color,
+        color: AppColors.blue,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(200),
 
