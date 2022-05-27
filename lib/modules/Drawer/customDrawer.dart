@@ -65,10 +65,10 @@ class CustomDrawer extends StatelessWidget {
                   SizedBox(height: 15,),
                   InkWell(
                     onTap: (){
-                      // MyStatefulWidget();
+                      //MyStatefulWidget();
 
-                      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                      //     builder:(context)=>Al3am_Alacademy()), (route) => false);
+                      Navigator.push(context, MaterialPageRoute(
+                          builder:(context)=>Al3am_Alacademy()));
                     },
                     child: Row( children: const [
                       Text('االعام الاكاديمي ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
@@ -87,7 +87,7 @@ class CustomDrawer extends StatelessWidget {
                     },
                     child: Row(
                       children: const [
-                      Text('العمال  ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      Text('العاملين  ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                     ],),),
                   SizedBox(height: 15,),
 

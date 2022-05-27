@@ -1,12 +1,11 @@
+import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
-import 'package:design_ui/modules/TapAppBar/tabbarmenu.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/modelMaktba.dart';
-import '../../models/yearsmodel.dart';
 class Almaktba extends StatefulWidget {
   Almaktba({Key? key}) : super(key: key);
 
@@ -48,17 +47,24 @@ class home extends State<Almaktba> {
           title:const Text('المكتبة',style: TextStyle(fontWeight: FontWeight.bold,
               color: Color(0xFFF1770D)),),
           actions: [
-            InkWell(
-              onTap: ()
-              {
+            IconButton(
+              onPressed: (){},
+              icon: Column(children: [
+              Icon(Icons.edit),
+              Text('Edit'),
 
-              },
-              child: Column(children: [
-                Icon(Icons.edit),
-                Text('Edit'),
-
-              ],),
-            )
+            ],),)
+            // InkWell(
+            //   onTap: ()
+            //   {
+            //
+            //   },
+            //   child: Column(children: [
+            //     Icon(Icons.edit),
+            //     Text('Edit'),
+            //
+            //   ],),
+            // )
           ],
         ),
         body: FutureBuilder<Library>(
@@ -66,42 +72,41 @@ class home extends State<Almaktba> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               //List<?>? Yearinfo = snapshot.data!.data!;
-              return SingleChildScrollView(
+              return InteractiveViewer(
+                constrained: false,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-
                       SizedBox(
                         height: 20,
                       ),
                       DataTable(
                         columnSpacing: 38.0,
-                        columns: const [
+                        columns:  [
                           DataColumn(label: Text('Year')),
+                          DataColumn(label: Text(' ')),
                           DataColumn(label: Text('Book Type')),
+                          DataColumn(label: Text(' ')),
                           DataColumn(label: Text('Number')),
                         ],
-                        rows:
-                            List.generate(snapshot.data!.data!.length, (index) {
-                          final y = snapshot.data!.data![index].attributes!
-                              .academicYear!.data!.attributes!.year
-                              .toString();
-                          final x = snapshot.data!.data![index].attributes!
-                              .bookType!.data!.attributes!
-                              .toString();
-                          final z =
-                              snapshot.data!.data![index].attributes!.number;
+                        rows: List.generate(snapshot.data!.data!.length, (index) {
+                          final y = snapshot.data!.data![index].attributes!.academicYear!.data!.attributes!.year.toString();
+                          final x = snapshot.data!.data![index].attributes!.bookType!.data!.attributes!.type.toString();
+                          final z = snapshot.data!.data![index].attributes!.number;
 
                           return DataRow(cells: [
-                            DataCell(Container(width: 75, child: TextFormField(controller:edit  ,
-                                keyboardType:TextInputType.name ,
-                                decoration: InputDecoration(hintText:"${y}" ),
-                                )
-                            )
-                            ),
+                            // DataCell(Container(width: 75, child: TextFormField(controller:edit  ,
+                            //     keyboardType:TextInputType.name ,
+                            //     decoration: InputDecoration(hintText:"${y}" ),
+                            //     )
+                            // )
+                            // ),
+                            DataCell(Container(child: Text('${y}'))),
+                            DataCell(VerticalDivider(thickness: 5.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${x}'))),
+                            DataCell(VerticalDivider(thickness: 5.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${z}')))
                           ]);
                         }),

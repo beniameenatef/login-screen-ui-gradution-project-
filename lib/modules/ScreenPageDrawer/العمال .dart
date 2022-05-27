@@ -53,49 +53,50 @@ class home extends State<AL3omal> {
           future: astaff,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return SingleChildScrollView(
+              return InteractiveViewer(
+                constrained: false,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child:Container(
-                    width: double.infinity,
+                  child:Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    DataTable(
 
-                    child:  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                      columnSpacing: 50.0,
+                      columns: const [
+                        DataColumn(label: Text('تعديل')),
+                        DataColumn(label: Text(' ')),
+                        DataColumn(label: Text('المسمى الوظيفى')),
+                        DataColumn(label: Text(' ')),
+                        DataColumn(label: Text('الأسم')),
 
-                      SizedBox(
-                        height: 10,
-                      ),
-                      DataTable(
+                      ],
 
-                        columnSpacing: 50.0,
-                        columns: const [
-                          DataColumn(label: Text('الأسم')),
-                          // DataColumn(label: IconButton(onPressed: (){},icon: ,)),
-                          DataColumn(label: Text('الوظيفة')),
-                          DataColumn(label: Text('تعديل')),
+                      rows:
+                      List.generate(snapshot.data!.data!.length, (index) {
+                        final y = snapshot.data!.data![index].attributes!.name.toString();
+                        final x = snapshot.data!.data![index].attributes!.job.toString();
 
-                        ],
+                        return DataRow(cells: [
+                        DataCell(Container( child: IconButton(onPressed: (){
+                          setState(() {
 
-                        rows:
-                        List.generate(snapshot.data!.data!.length, (index) {
-                          final y = snapshot.data!.data![index].attributes!.name.toString();
-                          final x = snapshot.data!.data![index].attributes!.job.toString();
+                          });
+                        },
+                        icon: Icon(Icons.edit),))),
+                          DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                          DataCell(Container( child: Text("${x}"))),
+                          DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                          DataCell(Container(child: Text('${y}'))),
 
-                          return DataRow(cells: [
-                            DataCell(Container(width: double.infinity, child: Text("${y}"))),
-                            DataCell(Container(child: Text('${x}'))),
-                            DataCell(Container(width: double.infinity, child: IconButton(onPressed: (){
-                              setState(() {
-
-                              });
-                            },
-                              icon: Icon(Icons.edit),))),
-                          ]);
-                        }),
-                      ),
-                    ],
-                  ),)
+                        ]);
+                      }),
+                    ),
+                  ],
+                  )
                 ),
               );
             } else if (snapshot.hasError) {
