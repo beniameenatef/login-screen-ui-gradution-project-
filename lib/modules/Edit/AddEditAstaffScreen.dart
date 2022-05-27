@@ -90,6 +90,7 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
             SizedBox(height: 30,),
             DefaultButton(
               text: 'أضف',
+              color: AppColors.blue,
               onpressed:() {
                 setState(() {
 
@@ -109,7 +110,7 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
               },
             ),
             SizedBox(height: 10,),
-            Text('${AlertText}')
+            Text('${AlertText}'),
           ],),
         ),
       ),
