@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:design_ui/bloc/home/homestate.dart';
+import 'package:design_ui/models/yearsmodel.dart';
 import 'package:design_ui/modules/ScreenNavigationBar/Home/ScreensHome/charts.dart';
 import 'package:design_ui/modules/ScreenNavigationBar/Home/ScreensHome/overview.dart';
 import 'package:design_ui/modules/ScreenNavigationBar/Home/ScreensHome/tables.dart';
@@ -39,16 +40,25 @@ class homecubit extends Cubit<qualityhomestates> {
     emit(qualitynavigationbarstate());
   }
 
+
   int currnetindextabbar=0;
   List<Widget> screentabbar = [
     Homeoverview(),
     Homecharts(),
+    TablesHome(),
+    TablesHome(),
+    TablesHome(),
+    TablesHome(),
     TablesHome(),
   ];
 
   void Homechangetapappbar(int index) {
     currnetindextabbar = index;
     emit(qualitytapappbarstate());
+  }
+  void Staffchangetapappbar(int index) {
+    currnetindextabbar = index;
+    emit(qualitytStaffapappbarstate());
   }
 
 // Year?model;
@@ -77,6 +87,42 @@ class homecubit extends Cubit<qualityhomestates> {
 //   });
 //
 // }
+  Year ?year;
+  List data=[];
+  Future<String> GetYears() async {
+
+      final response = await http.get(Uri.parse(
+          'https://qms-application.herokuapp.com/api/academic-years?populate=deep,4'),
+        //   headers: {"Accept": "application/json",
+        // "lang":"en"}
+      );
+
+      if(response.statusCode==200){
+        print(response.body);
+        var resBody =  jsonDecode(response.body);
+        print(resBody);
+
+            return resBody;
+
+      }
+      else
+      {
+        throw Exception('failed to get data');
+      }
+    }
+
+  //   final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/academic-years?populate=deep,4'));
+  //
+  //   if(response.statusCode==200){
+  //     print(response.body);
+  //     year= Year.fromJson(jsonDecode(response.body));
+  //     return year;
+  //   }
+  //   else
+  //   {
+  //     throw Exception('failed to get data');
+  //   }
+  // }
   }
 
 

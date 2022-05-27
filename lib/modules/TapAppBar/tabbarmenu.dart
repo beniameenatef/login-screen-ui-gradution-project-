@@ -18,8 +18,8 @@ class SelectionScreen extends StatelessWidget {
 
         return
           Container(
+
           padding: const EdgeInsetsDirectional.all(8),
-          height: 430,
           child: ContainedTabBarView(
             tabBarProperties: const TabBarProperties(
               unselectedLabelColor: Color(0xff9a9a9d),

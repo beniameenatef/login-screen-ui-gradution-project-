@@ -5,6 +5,9 @@ class qualityhomeInitialState extends qualityhomestates {}
 
 
 class qualitytapappbarstate extends qualityhomestates {}
+
+class qualitytStaffapappbarstate extends qualityhomestates {}
+
 class qualitynavigationbarstate extends qualityhomestates {}
 
 

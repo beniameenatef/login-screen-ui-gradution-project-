@@ -7,11 +7,11 @@ class Homecharts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<_SalesData> data = [
-      _SalesData('year', 2018),
-      _SalesData('year2', 2019),
-      _SalesData('year3', 2020),
-      _SalesData('year4', 2021),
-      _SalesData('year5', 2022)
+      _SalesData('year', 1),
+      _SalesData('year2', 2),
+      _SalesData('year3', 5),
+      _SalesData('year4', 10),
+      _SalesData('year5', 1)
     ];
     return Scaffold(
 

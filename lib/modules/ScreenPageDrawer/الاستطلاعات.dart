@@ -24,11 +24,11 @@ class Alasttla3at extends StatelessWidget {
         ),
         titleSpacing: 0,
 
-        title:Text('الاستطلاعات',style: TextStyle(fontWeight: FontWeight.bold,
+        title:const Text('الاستطلاعات',style: TextStyle(fontWeight: FontWeight.bold,
             color: Color(0xFFF1770D)),)
         ,
       ),
-      body: Column(children: [
+      body: Column(children: const [
         Text('الاستطلاعات')
       ],),
     );

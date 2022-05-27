@@ -3,18 +3,15 @@ import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%A8%D8%A
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A8%D8%B1%D8%AA%D9%88%D9%83%D9%88%D9%84.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%B9%D8%A7%D9%85%20%D8%A7%D9%84%D8%A7%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A.dart';
-import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A7%D8%B1%D9%8A%D9%8A%D9%86.dart';
-import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%86%D9%88%D8%A7%D8%B9%20%D8%A7%D9%84%D9%83%D8%AA%D8%A8.dart';
+import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%B9%D9%85%D8%A7%D9%84%20.dart';
+import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D9%85%D9%83%D8%AA%D8%A8%D8%A9.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%AA%D8%AE%D8%B5%D8%B5%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AD%D8%A7%D8%AB.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%B9%D9%86%D8%A7%D8%B5%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D9%85%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D9%86%D8%B4%D8%A7%D8%B7%20%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/login/cubitlogin.dart';
-import '../../bloc/login/stateslogin.dart';
 import '../ScreenPageDrawer/اعداد الخريجين.dart';
 import '../ScreenPageDrawer/الاقسام.dart';
 import '../ScreenPageDrawer/المعامل.dart';
@@ -68,29 +65,14 @@ class CustomDrawer extends StatelessWidget {
                   SizedBox(height: 15,),
                   InkWell(
                     onTap: (){
-                      MyStatefulWidget();
+                      // MyStatefulWidget();
 
                       // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                       //     builder:(context)=>Al3am_Alacademy()), (route) => false);
                     },
                     child: Row( children: const [
                       Text('االعام الاكاديمي ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                      MyAppp(),
-                    ],),),
-                  const SizedBox(height: 15,),
-
-                  InkWell(
-                    onTap: ()
-                    {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Al3am_Alacademy(),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      children: const [
-                      Text('العمال الادارين ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      // MyAppp(),
                     ],),),
                   SizedBox(height: 15,),
 
@@ -98,14 +80,14 @@ class CustomDrawer extends StatelessWidget {
                     onTap: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Al3omal_Aladareen(),
+                        MaterialPageRoute(builder: (context) => AL3omal(),
                         ),
                       );
 
                     },
                     child: Row(
                       children: const [
-                      Text('العمال الاكادميين ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      Text('العمال  ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                     ],),),
                   SizedBox(height: 15,),
 
@@ -168,13 +150,12 @@ class CustomDrawer extends StatelessWidget {
                     onTap: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Anwa3Alkotb(),
+                        MaterialPageRoute(builder: (context) => Almaktba(),
                         ),
                       );
-
                     },
                     child: Row( children: const [
-                      Text('انواع الكتب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      Text(' المكتبة',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                     ],),),
                   SizedBox(height: 15,),
 
