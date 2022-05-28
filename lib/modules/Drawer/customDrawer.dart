@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import '../ScreenPageDrawer/اعداد الخريجين.dart';
 import '../ScreenPageDrawer/الاقسام.dart';
 import '../ScreenPageDrawer/المعامل.dart';
+import '../ScreenPageDrawer/انواع الكتب.dart';
 import '../ScreenPageDrawer/توزيع الطلاب.dart';
 import '../ScreenPageDrawer/نوع البرتوكول.dart';
 
@@ -145,6 +146,19 @@ class CustomDrawer extends StatelessWidget {
                       Text('نشاط الطلاب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                     ],),),
                   SizedBox(height: 15,),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Anwa3elkotb(),
+                        ),
+                      );
+                    },
+                    child: Row( children: const [
+                      Text(' أنواع الكتب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                    ],),),
+                  SizedBox(height: 15,),
+
 
                   InkWell(
                     onTap: (){

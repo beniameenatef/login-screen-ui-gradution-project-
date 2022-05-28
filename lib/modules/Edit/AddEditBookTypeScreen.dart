@@ -1,24 +1,22 @@
+import 'package:design_ui/models/bookTypemodel.dart';
+import 'package:design_ui/network/http/HttpPost.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
-import '../../models/modelStaff.dart';
 import '../../network/http/HttpGet.dart';
-import '../../network/http/HttpPost.dart';
-class AddEditAstaffScreen extends StatefulWidget {
-  const AddEditAstaffScreen({Key? key}) : super(key: key);
+class AddEditBookTypeScreen extends StatefulWidget {
+  const AddEditBookTypeScreen({Key? key}) : super(key: key);
 
   @override
-  _AddEditAstaffScreenState createState() => _AddEditAstaffScreenState();
+  _AddEditBookTypeScreenState createState() => _AddEditBookTypeScreenState();
 }
 
-class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
-  @override
-  TextEditingController _NameController= TextEditingController();
-  TextEditingController _JobController= TextEditingController();
+class _AddEditBookTypeScreenState extends State<AddEditBookTypeScreen> {
+  TextEditingController _BookTypeController= TextEditingController();
 
-  late Future<Astaff> astaff;
+  late Future<Booktype> booktype;
   String AlertText= ' ';
   final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
@@ -26,10 +24,10 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    astaff =GetAstaff();
+    booktype =GetBookType();
 
   }
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +42,7 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
           ),),
         titleSpacing: 0,
 
-        title:Text('أضف الى العاملين',style: TextStyle(fontWeight: FontWeight.bold,
+        title:Text('أضف الى انواع الكتب',style: TextStyle(fontWeight: FontWeight.bold,
             color: Color(0xFFF1770D)),),
       ),
       body: Padding(
@@ -54,26 +52,14 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
           child: Column(children: [
             SizedBox(height: 30,),
             DefaultTextField(
-              controller: _NameController,
-              validate: (value) {
-                if (value!.isEmpty) {
-                  return 'ادخل بعض البيانات';
-                }
-                return null;
-              },
-              text: 'الأسم'
-
-            ),
-            SizedBox(height: 30,),
-            DefaultTextField(
-                controller: _JobController,
+                controller: _BookTypeController,
                 validate: (value) {
                   if (value!.isEmpty) {
                     return 'ادخل بعض البيانات';
                   }
                   return null;
                 },
-                text: 'المسمى الوظيفى'
+                text: 'نوع الكتاب'
 
             ),
             SizedBox(height: 30,),
@@ -86,7 +72,7 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
                   final FormState? form = formKey.currentState;
                   if(form!.validate())
                   {
-                    astaff = PostAstaff(_NameController.text, _JobController.text);
+                    booktype = PostBookType(_BookTypeController.text);
                     AlertText = 'تم الاضافة';
                     Navigator.pop(context);
                   }

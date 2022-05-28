@@ -41,7 +41,7 @@ class homecubit extends Cubit<qualityhomestates> {
   }
 
 
-  int currnetindextabbar=0;
+  int currnetindextabbar = 0;
   List<Widget> screentabbar = [
     Homeoverview(),
     Homecharts(),
@@ -56,75 +56,10 @@ class homecubit extends Cubit<qualityhomestates> {
     currnetindextabbar = index;
     emit(qualitytapappbarstate());
   }
+
   void Staffchangetapappbar(int index) {
     currnetindextabbar = index;
     emit(qualitytStaffapappbarstate());
   }
 
-// Year?model;
-//
-// Future<Year> GetYears()async  {
-//   emit(qualitydataloadingstate());
-//    model=await http.get(
-//       Uri.parse('https://qms-application.herokuapp.com/api/academic-years?populate=deep,4')).
-//   then((value)
-//   {
-//     if(value.statusCode==200){
-//
-//       print(value.body);
-//       return Year.fromJson(jsonDecode(value.body));
-//
-//     }
-//     else
-//     {
-//       throw Exception('failed to get data');
-//     }
-//
-//   }).catchError((error){
-//     emit(qualitydataerrorstate(error.toString()));
-//     print(error);
-//
-//   });
-//
-// }
-  Year ?year;
-  List data=[];
-  Future<String> GetYears() async {
-
-      final response = await http.get(Uri.parse(
-          'https://qms-application.herokuapp.com/api/academic-years?populate=deep,4'),
-        //   headers: {"Accept": "application/json",
-        // "lang":"en"}
-      );
-
-      if(response.statusCode==200){
-        print(response.body);
-        var resBody =  jsonDecode(response.body);
-        print(resBody);
-
-            return resBody;
-
-      }
-      else
-      {
-        throw Exception('failed to get data');
-      }
-    }
-
-  //   final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/academic-years?populate=deep,4'));
-  //
-  //   if(response.statusCode==200){
-  //     print(response.body);
-  //     year= Year.fromJson(jsonDecode(response.body));
-  //     return year;
-  //   }
-  //   else
-  //   {
-  //     throw Exception('failed to get data');
-  //   }
-  // }
-  }
-
-
-
-
+}

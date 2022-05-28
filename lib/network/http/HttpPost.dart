@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:design_ui/models/modelMaktba.dart';
 import 'package:http/http.dart' as http;
 
+import '../../models/bookTypemodel.dart';
 import '../../models/modelStaff.dart';
 
 
@@ -62,3 +63,27 @@ Future<Library> PostLibrary( int num, int idyear , int idbook) async {
     throw Exception('Failed to post library.');
   }
 }
+Future<Booktype> PostBookType(String name) async {
+
+  dynamic api = 'https://qms-application.herokuapp.com/api/book-types';
+
+  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+    //'Authorization' : 'xyz',
+    'Content-Type': 'application/json; charset=UTF-8',
+  },
+      body: jsonEncode(<dynamic,dynamic>{
+          "data":{
+            "Type":name
+
+          }
+      })
+  );
+  if (response.statusCode == 200) {
+    var data = jsonDecode(response.body.toString());
+    print(data);
+    return Booktype.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to post book type.');
+  }
+}
+
