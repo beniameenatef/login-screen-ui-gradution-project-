@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/modelMaktba.dart';
+import '../Edit/AddEditLibraryScreen.dart';
 class Almaktba extends StatefulWidget {
   Almaktba({Key? key}) : super(key: key);
 
@@ -92,9 +93,9 @@ class home extends State<Almaktba> {
                           DataColumn(label: Text('Number')),
                         ],
                         rows: List.generate(snapshot.data!.data!.length, (index) {
-                          final y = snapshot.data!.data![index].attributes!.academicYear!.data!.attributes!.year.toString();
-                          final x = snapshot.data!.data![index].attributes!.bookType!.data!.attributes!.type.toString();
-                          final z = snapshot.data!.data![index].attributes!.number;
+                          dynamic y = snapshot.data!.data![index].attributes!.academicYear!.data!.attributes!.year.toString();
+                          dynamic x = snapshot.data!.data![index].attributes!.bookType!.data!.attributes!.type.toString();
+                          dynamic z = snapshot.data!.data![index].attributes!.number;
 
                           return DataRow(cells: [
                             // DataCell(Container(width: 75, child: TextFormField(controller:edit  ,
@@ -103,11 +104,11 @@ class home extends State<Almaktba> {
                             //     )
                             // )
                             // ),
-                            DataCell(Container(child: Text('${y}'))),
-                            DataCell(VerticalDivider(thickness: 5.0,color: AppColors.blue,)),
-                            DataCell(Container(child: Text('${x}'))),
-                            DataCell(VerticalDivider(thickness: 5.0,color: AppColors.blue,)),
-                            DataCell(Container(child: Text('${z}')))
+                            DataCell(Container(child: ( y== Null)?  Text(" ") : Text('${y}') )),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: (x == Null)? Text(' '):Text('${x}'))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: (z == Null)? Text(" "):Text('${z}')))
                           ]);
                         }),
                       ),
@@ -133,6 +134,16 @@ class home extends State<Almaktba> {
               );
             }
           },
-        ));
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddEditLibraryScreen()));
+            });    },
+          backgroundColor: AppColors.blue,
+          child: const Icon(Icons.add),
+        )
+    );
   }
 }

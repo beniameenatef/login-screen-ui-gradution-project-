@@ -22,17 +22,6 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
   String AlertText= ' ';
   final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
-  void validateAndSave(){
-    final FormState? form = formKey.currentState;
-    if(form!.validate())
-    {
-      print ('Form is valid');
-    }
-    else
-    {
-      print('form is invalid');
-    }
-  }
   @override
   void initState() {
     // TODO: implement initState
