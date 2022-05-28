@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:design_ui/models/bookTypemodel.dart';
 import 'package:design_ui/models/modelMaktba.dart';
 import 'package:design_ui/models/modelStaff.dart';
 import 'package:design_ui/models/oneyearmodel.dart';
@@ -57,5 +58,17 @@ Future<Astaff> GetAstaff() async {
   else
   {
     throw Exception('failed to get astaff data');
+  }
+}
+Future<Booktype> GetBookType() async {
+  final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/book-types'));
+
+  if(response.statusCode==200){
+    print(response.body);
+    return Booktype.fromJson(jsonDecode(response.body));
+  }
+  else
+  {
+    throw Exception('failed to get book type data');
   }
 }

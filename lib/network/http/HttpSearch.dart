@@ -18,3 +18,18 @@ Future<int> SearchOneYear(String value) async {
   }
 
 }
+Future<int> SearchBooktype(String value) async {
+  final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/book-types?filters[Type][\$eq]=${value}'));
+
+  if(response.statusCode==200){
+    print(response.body);
+    int jsonResponse = json.decode(response.body)['data'][0]['id'] ;
+    print(jsonResponse);
+    return jsonResponse;
+  }
+  else
+  {
+    throw Exception('failed to get search booktype data');
+  }
+
+}

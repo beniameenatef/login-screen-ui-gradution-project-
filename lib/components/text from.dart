@@ -5,7 +5,7 @@ class DefaultTextField extends StatelessWidget {
  final TextEditingController?controller;
   final String? Function (String?)? validate;
   final String? text;
-  final IconData? prefix;
+    IconData? prefix;
 
 
   DefaultTextField({
@@ -28,13 +28,13 @@ class DefaultTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: text,
 
-        prefixIcon: Icon(
-          prefix,color: AppColors.black,
-        ),
+        // prefixIcon: Icon(
+        //   prefix,color: AppColors.black,
+        // ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.blue, width: 2,),
-            borderRadius:BorderRadius.circular(10),
+            borderRadius:BorderRadius.circular(15),
 
           ),
 

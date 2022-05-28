@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:design_ui/models/bookTypemodel.dart';
 import 'package:design_ui/models/modelMaktba.dart';
 import 'package:design_ui/models/oneyearmodel.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
@@ -27,10 +28,13 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
 
   late Future<Library> library;
   late Future<Oneyear> year;
+  late Future<Booktype> booktype;
   String AlertText= ' ';
   final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
   String? selectedValue;
+  String? selectedValue2;
   late int? id;
+  late int? id2;
 
 
   @override
@@ -38,6 +42,7 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
     // TODO: implement initState
     super.initState();
     year = GetOneYears();
+    booktype=GetBookType();
     library =GetLibrary();
 
   }
@@ -58,11 +63,12 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
         title:Text('أضف الى المكتبة',style: TextStyle(fontWeight: FontWeight.bold,
             color: Color(0xFFF1770D)),),
       ),
-      body: FutureBuilder<Oneyear>(
-        future: year,
-        builder: (context, snapshot) {
+      body: FutureBuilder(
+        future: Future.wait([year,booktype]),
+        builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
-            List<Datumm>? years = snapshot.data!.data;
+            List<Datumm>? years = snapshot.data![0]!.data;
+            List<Ddatum>? booktypes = snapshot.data![1].data;
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -70,17 +76,82 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
                     key: formKey,
                     child: Column(children: [
                       SizedBox(height: 30,),
-                    DefaultTextField(
-                        controller: _BookTypeController,
-                        validate: (value) {
-                          if (value!.isEmpty) {
-                            return 'ادخل بعض البيانات';
-                          }
-                          return null;
-                        },
-                        text: 'نوع الكتاب'
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton2<dynamic>(
+                          isExpanded: true,
+                          hint: Row(
+                            children: const [
+                              Expanded(
+                                child: Text(
+                                  'نوع الكتاب',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ), items: booktypes?.map((item) => DropdownMenuItem(
+                          value: item.attributes!.type,
+                          child: Text(
+                            ("${item.attributes!.type.toString()}"),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.blue,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ))
+                            .toList(),
+                          value: selectedValue2,
+                          onChanged: (value)  {
+                            setState(() {
+                              selectedValue2 = value as String;
 
-                    ),
+                              Future<int> data = SearchBooktype(value.toString());
+                              print(data);
+                              data.then((int value) => (id2=value))
+                                  .catchError((e) => 499);
+                              // id = data;
+
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down_outlined,
+                          ),
+                          iconSize: 14,
+                          iconEnabledColor: AppColors.blue,
+                          iconDisabledColor: Colors.grey,
+                          buttonHeight: 70,
+                          buttonWidth: double.infinity,
+                          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                          buttonDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.black45,
+                            ),
+                            color: Colors.white,
+                          ),
+                          buttonElevation: 0,
+                          itemHeight: 45,
+                          itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                          dropdownMaxHeight: 200,
+                          dropdownWidth: 350,
+                          dropdownPadding: EdgeInsets.symmetric(horizontal: 10),
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            color: Colors.white,
+                          ),
+                          dropdownElevation: 8,
+                          scrollbarRadius: const Radius.circular(40),
+                          scrollbarThickness: 6,
+                          scrollbarAlwaysShow: true,
+                          offset: const Offset(-20, 0),
+                        ),
+                      ),
                     SizedBox(height: 30,),
                     DefaultTextField(
                         controller: _NumberController,
@@ -101,7 +172,7 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
                             children: const [
                               Expanded(
                                 child: Text(
-                                  '         السنة',
+                                  'السنة',
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
@@ -117,7 +188,7 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
                         ("${item.attributes!.year.toString()}"),
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: AppColors.blue,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -129,7 +200,7 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
                   setState(() {
                     selectedValue = value as String;
 
-                      Future<int> data =   SearchOneYear(value.toString());
+                      Future<int> data = SearchOneYear(value.toString());
                       print(data);
                       data.then((int value) => (id=value))
                         .catchError((e) => 499);
@@ -147,21 +218,21 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
                 buttonWidth: double.infinity,
                 buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                 buttonDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: Colors.black45,
                   ),
                   color: Colors.white,
                 ),
                 buttonElevation: 0,
-                itemHeight: 40,
+                itemHeight: 45,
                 itemPadding: const EdgeInsets.only(left: 14, right: 14),
                 dropdownMaxHeight: 200,
                 dropdownWidth: 350,
                 dropdownPadding: EdgeInsets.symmetric(horizontal: 10),
                 dropdownDecoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
-                  color: Colors.grey,
+                  color: Colors.white,
                 ),
                 dropdownElevation: 8,
                 scrollbarRadius: const Radius.circular(40),
@@ -180,13 +251,14 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
           final FormState? form = formKey.currentState;
           if(form!.validate())
           {
-          library=PostLibrary(int.parse(_NumberController.text), id!, 2);
+          library=PostLibrary(int.parse(_NumberController.text), id!, id2!);
           AlertText = 'تم الاضافة';
           }
           else
           {
           AlertText = 'ادخل بعض البيانات';
           }
+          Navigator.pop(context);
 
           });
 
@@ -202,18 +274,18 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
         else if (snapshot.hasError) {
           return Text('${snapshot.error}');
           } else {
-          return Center(
-          child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
 
-          CircularProgressIndicator(
-          color: Colors.blue,
-          ),
-          Text('LOADING'),
-          ],
-          ),
-          );
+                  CircularProgressIndicator(
+                    color: AppColors.blue,
+                  ),
+                  Text('تحميل'),
+                ],
+              ),
+            );
           }
         }
         )

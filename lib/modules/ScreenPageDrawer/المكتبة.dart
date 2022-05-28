@@ -126,9 +126,9 @@ class home extends State<Almaktba> {
                   children: const [
 
                     CircularProgressIndicator(
-                      color: Colors.blue,
+                      color: AppColors.blue,
                     ),
-                    Text('LOADING'),
+                    Text('تحميل'),
                   ],
                 ),
               );
