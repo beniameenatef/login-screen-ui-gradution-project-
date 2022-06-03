@@ -1,9 +1,7 @@
-import 'package:design_ui/modules/Drawer/yeardropdwon.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%A8%D8%AD%D8%A7%D8%AB.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A8%D8%B1%D8%AA%D9%88%D9%83%D9%88%D9%84.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%B9%D8%A7%D9%85%20%D8%A7%D9%84%D8%A7%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A.dart';
-import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%B9%D9%85%D8%A7%D9%84%20.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D9%85%D9%83%D8%AA%D8%A8%D8%A9.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%AA%D8%AE%D8%B5%D8%B5%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AD%D8%A7%D8%AB.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%B9%D9%86%D8%A7%D8%B5%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA.dart';
@@ -11,9 +9,10 @@ import 'package:design_ui/modules/ScreenPageDrawer/%D9%85%D8%B9%D8%A7%D9%85%D9%8
 import 'package:design_ui/modules/ScreenPageDrawer/%D9%86%D8%B4%D8%A7%D8%B7%20%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../ScreenPageDrawer/اعداد الخريجين.dart';
 import '../ScreenPageDrawer/الاقسام.dart';
+import '../ScreenPageDrawer/العمال الاداريين.dart';
+import '../ScreenPageDrawer/العمال الاكادميين .dart';
 import '../ScreenPageDrawer/المعامل.dart';
 import '../ScreenPageDrawer/انواع الكتب.dart';
 import '../ScreenPageDrawer/توزيع الطلاب.dart';
@@ -88,8 +87,22 @@ class CustomDrawer extends StatelessWidget {
                     },
                     child: Row(
                       children: const [
-                      Text('العاملين  ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      Text('العمال الاكادميين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                     ],),),
+                  SizedBox(height: 15,),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => El3omalelEdareen(),
+                        ),
+                      );
+
+                    },
+                    child: Row(
+                      children: const [
+                        Text('العمال الاداريين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      ],),),
                   SizedBox(height: 15,),
 
                   InkWell(

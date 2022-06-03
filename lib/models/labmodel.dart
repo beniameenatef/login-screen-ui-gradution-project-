@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final studentActivity = studentActivityFromJson(jsonString);
+//     final lab = labFromJson(jsonString);
 
 import 'dart:convert';
 
-StudentActivity studentActivityFromJson(String str) => StudentActivity.fromJson(json.decode(str));
+Lab labFromJson(String str) => Lab.fromJson(json.decode(str));
 
-String studentActivityToJson(StudentActivity data) => json.encode(data.toJson());
+String labToJson(Lab data) => json.encode(data.toJson());
 
-class StudentActivity {
-  StudentActivity({
+class Lab {
+  Lab({
     this.data,
     this.meta,
   });
@@ -17,7 +17,7 @@ class StudentActivity {
   List<Datum>? data;
   Meta? meta;
 
-  factory StudentActivity.fromJson(Map<String, dynamic> json) => StudentActivity(
+  factory Lab.fromJson(Map<String, dynamic> json) => Lab(
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     meta: Meta.fromJson(json["meta"]),
   );
@@ -50,52 +50,48 @@ class Datum {
 
 class DatumAttributes {
   DatumAttributes({
-    this.total,
-    this.number,
-    this.percentage,
+    this.pCnumber,
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
-    this.year,
+    this.labNumber,
+    this.mid,
   });
 
-  String? total;
-  String? number;
-  int? percentage;
+  String? pCnumber;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? publishedAt;
-  Yearr? year;
+  String? labNumber;
+  Mid? mid;
 
   factory DatumAttributes.fromJson(Map<String, dynamic> json) => DatumAttributes(
-    total: json["Total"],
-    number: json["Number"],
-    percentage: json["Percentage"],
+    pCnumber: json["PCnumber"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     publishedAt: DateTime.parse(json["publishedAt"]),
-    year: Yearr.fromJson(json["Year"]),
+    labNumber: json["LabNumber"],
+    mid: Mid.fromJson(json["MID"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "Total": total,
-    "Number": number,
-    "Percentage": percentage,
+    "PCnumber": pCnumber,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "publishedAt": publishedAt?.toIso8601String(),
-    "Year": year?.toJson(),
+    "LabNumber": labNumber,
+    "MID": mid?.toJson(),
   };
 }
 
-class Yearr {
-  Yearr({
+class Mid {
+  Mid({
     this.data,
   });
 
   Data? data;
 
-  factory Yearr.fromJson(Map<String, dynamic> json) => Yearr(
+  factory Mid.fromJson(Map<String, dynamic> json) => Mid(
     data: Data.fromJson(json["data"]),
   );
 
@@ -126,26 +122,30 @@ class Data {
 
 class DataAttributes {
   DataAttributes({
-    this.year,
+    this.name,
+    this.job,
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
   });
 
-  String? year;
+  String? name;
+  String? job;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? publishedAt;
 
   factory DataAttributes.fromJson(Map<String, dynamic> json) => DataAttributes(
-    year: json["Year"],
+    name: json["Name"],
+    job: json["Job"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     publishedAt: DateTime.parse(json["publishedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "Year": year,
+    "Name": name,
+    "Job": job,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "publishedAt": publishedAt?.toIso8601String(),

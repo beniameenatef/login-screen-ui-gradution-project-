@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final studentActivity = studentActivityFromJson(jsonString);
+//     final studentDistribution = studentDistributionFromJson(jsonString);
 
 import 'dart:convert';
 
-StudentActivity studentActivityFromJson(String str) => StudentActivity.fromJson(json.decode(str));
+StudentDistribution studentDistributionFromJson(String str) => StudentDistribution.fromJson(json.decode(str));
 
-String studentActivityToJson(StudentActivity data) => json.encode(data.toJson());
+String studentDistributionToJson(StudentDistribution data) => json.encode(data.toJson());
 
-class StudentActivity {
-  StudentActivity({
+class StudentDistribution {
+  StudentDistribution({
     this.data,
     this.meta,
   });
@@ -17,7 +17,7 @@ class StudentActivity {
   List<Datum>? data;
   Meta? meta;
 
-  factory StudentActivity.fromJson(Map<String, dynamic> json) => StudentActivity(
+  factory StudentDistribution.fromJson(Map<String, dynamic> json) => StudentDistribution(
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     meta: Meta.fromJson(json["meta"]),
   );
@@ -50,52 +50,92 @@ class Datum {
 
 class DatumAttributes {
   DatumAttributes({
-    this.total,
-    this.number,
-    this.percentage,
+    this.level,
+    this.male,
+    this.female,
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
     this.year,
+    this.cs,
+    this.attributesIs,
+    this.ai,
+    this.ni,
+    this.general,
   });
 
-  String? total;
-  String? number;
-  int? percentage;
+  int? level;
+  String? male;
+  String? female;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? publishedAt;
-  Yearr? year;
+  Yeear? year;
+  Ai? cs;
+  Ai? attributesIs;
+  Ai? ai;
+  Ai? ni;
+  Ai? general;
 
   factory DatumAttributes.fromJson(Map<String, dynamic> json) => DatumAttributes(
-    total: json["Total"],
-    number: json["Number"],
-    percentage: json["Percentage"],
+    level: json["Level"],
+    male: json["Male"],
+    female: json["Female"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     publishedAt: DateTime.parse(json["publishedAt"]),
-    year: Yearr.fromJson(json["Year"]),
+    year: Yeear.fromJson(json["year"]),
+    cs: Ai.fromJson(json["CS"]),
+    attributesIs: Ai.fromJson(json["IS"]),
+    ai: Ai.fromJson(json["AI"]),
+    ni: Ai.fromJson(json["NI"]),
+    general: Ai.fromJson(json["General"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "Total": total,
-    "Number": number,
-    "Percentage": percentage,
+    "Level": level,
+    "Male": male,
+    "Female": female,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "publishedAt": publishedAt?.toIso8601String(),
-    "Year": year?.toJson(),
+    "year": year?.toJson(),
+    "CS": cs?.toJson(),
+    "IS": attributesIs?.toJson(),
+    "AI": ai?.toJson(),
+    "NI": ni?.toJson(),
+    "General": general?.toJson(),
   };
 }
 
-class Yearr {
-  Yearr({
+class Ai {
+  Ai({
+    this.id,
+    this.number,
+  });
+
+  int? id;
+  String? number;
+
+  factory Ai.fromJson(Map<String, dynamic> json) => Ai(
+    id: json["id"],
+    number: json["Number"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "Number": number,
+  };
+}
+
+class Yeear {
+  Yeear({
     this.data,
   });
 
   Data? data;
 
-  factory Yearr.fromJson(Map<String, dynamic> json) => Yearr(
+  factory Yeear.fromJson(Map<String, dynamic> json) => Yeear(
     data: Data.fromJson(json["data"]),
   );
 

@@ -1,24 +1,22 @@
+import 'package:design_ui/models/oneyearmodel.dart';
+import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
-import '../../models/modelStaff.dart';
-import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpPost.dart';
-class AddEditAstaffScreen extends StatefulWidget {
-  const AddEditAstaffScreen({Key? key}) : super(key: key);
+class AddEditOneYearScreen extends StatefulWidget {
+  const AddEditOneYearScreen({Key? key}) : super(key: key);
 
   @override
-  _AddEditAstaffScreenState createState() => _AddEditAstaffScreenState();
+  _AddEditOneYearScreenState createState() => _AddEditOneYearScreenState();
 }
 
-class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
-  @override
-  TextEditingController _NameController= TextEditingController();
-  TextEditingController _JobController= TextEditingController();
+class _AddEditOneYearScreenState extends State<AddEditOneYearScreen> {
+  TextEditingController _YearController= TextEditingController();
 
-  late Future<Astaff> astaff;
+  late Future<Oneyear> oneyear;
   String AlertText= ' ';
   final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
@@ -26,12 +24,12 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    astaff =GetAstaff();
+    oneyear =GetOneYears();
 
   }
-
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF054978),
         leadingWidth: 40,
@@ -44,7 +42,7 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
           ),),
         titleSpacing: 0,
 
-        title:Text('أضف الى العاملين',style: TextStyle(fontWeight: FontWeight.bold,
+        title:Text('أضف الى العام الاكاديمى',style: TextStyle(fontWeight: FontWeight.bold,
             color: Color(0xFFF1770D)),),
       ),
       body: Padding(
@@ -54,26 +52,14 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
           child: Column(children: [
             SizedBox(height: 30,),
             DefaultTextField(
-              controller: _NameController,
-              validate: (value) {
-                if (value!.isEmpty) {
-                  return 'ادخل بعض البيانات';
-                }
-                return null;
-              },
-              text: 'الأسم'
-
-            ),
-            SizedBox(height: 30,),
-            DefaultTextField(
-                controller: _JobController,
+                controller: _YearController,
                 validate: (value) {
                   if (value!.isEmpty) {
                     return 'ادخل بعض البيانات';
                   }
                   return null;
                 },
-                text: 'المسمى الوظيفى'
+                text: 'ex:2018/2019 أدخل السنه بهذه الصيغه'
 
             ),
             SizedBox(height: 30,),
@@ -86,10 +72,9 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
                   final FormState? form = formKey.currentState;
                   if(form!.validate())
                   {
-                    astaff = PostAstaff(_NameController.text, _JobController.text);
+                    oneyear=PostOneYear(_YearController.text);
                     AlertText = 'تم الاضافة';
                     Navigator.pop(context);
-                    
                   }
                   else
                   {

@@ -6,6 +6,9 @@ class DefaultTextField extends StatelessWidget {
   final String? Function (String?)? validate;
   final String? text;
     IconData? prefix;
+    int? max;
+    TextInputType?  keyboardtype;
+
 
 
   DefaultTextField({
@@ -14,6 +17,8 @@ class DefaultTextField extends StatelessWidget {
     this.validate,
     this.text,
     this.prefix,
+    this.max,
+    this.keyboardtype
 
 
   }) : super(key: key);
@@ -25,6 +30,8 @@ class DefaultTextField extends StatelessWidget {
 
     controller: controller,
       validator: validate,
+      keyboardType: keyboardtype,
+      maxLines: max,
       decoration: InputDecoration(
         hintText: text,
 

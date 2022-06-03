@@ -21,8 +21,7 @@ class AddEditLibraryScreen extends StatefulWidget {
 
 class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
   @override
-  TextEditingController _YearController= TextEditingController();
-  TextEditingController _BookTypeController= TextEditingController();
+
   TextEditingController _NumberController= TextEditingController();
 
 

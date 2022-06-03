@@ -1,24 +1,24 @@
 // To parse this JSON data, do
 //
-//     final studentActivity = studentActivityFromJson(jsonString);
+//     final surveyItems = surveyItemsFromJson(jsonString);
 
 import 'dart:convert';
 
-StudentActivity studentActivityFromJson(String str) => StudentActivity.fromJson(json.decode(str));
+SurveyItems surveyItemsFromJson(String str) => SurveyItems.fromJson(json.decode(str));
 
-String studentActivityToJson(StudentActivity data) => json.encode(data.toJson());
+String surveyItemsToJson(SurveyItems data) => json.encode(data.toJson());
 
-class StudentActivity {
-  StudentActivity({
+class SurveyItems {
+  SurveyItems({
     this.data,
     this.meta,
   });
 
-  List<Datum>? data;
+  List<Datuum>? data;
   Meta? meta;
 
-  factory StudentActivity.fromJson(Map<String, dynamic> json) => StudentActivity(
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  factory SurveyItems.fromJson(Map<String, dynamic> json) => SurveyItems(
+    data: List<Datuum>.from(json["data"].map((x) => Datuum.fromJson(x))),
     meta: Meta.fromJson(json["meta"]),
   );
 
@@ -28,8 +28,8 @@ class StudentActivity {
   };
 }
 
-class Datum {
-  Datum({
+class Datuum {
+  Datuum({
     this.id,
     this.attributes,
   });
@@ -37,7 +37,8 @@ class Datum {
   int? id;
   DatumAttributes? attributes;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+
+  factory Datuum.fromJson(Map<String, dynamic> json) => Datuum(
     id: json["id"],
     attributes: DatumAttributes.fromJson(json["attributes"]),
   );
@@ -50,52 +51,46 @@ class Datum {
 
 class DatumAttributes {
   DatumAttributes({
-    this.total,
-    this.number,
-    this.percentage,
+    this.description,
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
-    this.year,
+    this.survey,
   });
 
-  String? total;
-  String? number;
-  int? percentage;
+  String? description;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? publishedAt;
-  Yearr? year;
+  Survey? survey;
 
   factory DatumAttributes.fromJson(Map<String, dynamic> json) => DatumAttributes(
-    total: json["Total"],
-    number: json["Number"],
-    percentage: json["Percentage"],
+    description: json["Description"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     publishedAt: DateTime.parse(json["publishedAt"]),
-    year: Yearr.fromJson(json["Year"]),
+    survey: Survey.fromJson(json["survey"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "Total": total,
-    "Number": number,
-    "Percentage": percentage,
+    "Description": description,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "publishedAt": publishedAt?.toIso8601String(),
-    "Year": year?.toJson(),
+    "survey": survey?.toJson(),
+
+
   };
 }
 
-class Yearr {
-  Yearr({
+class Survey {
+  Survey({
     this.data,
   });
 
   Data? data;
 
-  factory Yearr.fromJson(Map<String, dynamic> json) => Yearr(
+  factory Survey.fromJson(Map<String, dynamic> json) => Survey(
     data: Data.fromJson(json["data"]),
   );
 
@@ -126,26 +121,26 @@ class Data {
 
 class DataAttributes {
   DataAttributes({
-    this.year,
+    this.sType,
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
   });
 
-  String? year;
+  String? sType;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? publishedAt;
 
   factory DataAttributes.fromJson(Map<String, dynamic> json) => DataAttributes(
-    year: json["Year"],
+    sType: json["sType"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     publishedAt: DateTime.parse(json["publishedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "Year": year,
+    "sType": sType,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "publishedAt": publishedAt?.toIso8601String(),

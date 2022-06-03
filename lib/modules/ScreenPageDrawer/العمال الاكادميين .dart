@@ -45,7 +45,7 @@ class home extends State<AL3omal> {
           ),),
           titleSpacing: 0,
 
-          title:Text('العاملين',style: TextStyle(fontWeight: FontWeight.bold,
+          title:Text('أعضاء هيئة التدريس',style: TextStyle(fontWeight: FontWeight.bold,
               color: Color(0xFFF1770D)),),
         ),
 
@@ -67,11 +67,13 @@ class home extends State<AL3omal> {
 
                       columnSpacing: 50.0,
                       columns: const [
-                        DataColumn(label: Text('تعديل')),
+                        DataColumn(label: Text('العدد')),
+                        DataColumn(label: Text(' ')),
+                        DataColumn(label: Text('الأسم')),
                         DataColumn(label: Text(' ')),
                         DataColumn(label: Text('المسمى الوظيفى')),
                         DataColumn(label: Text(' ')),
-                        DataColumn(label: Text('الأسم')),
+
 
                       ],
 
@@ -79,18 +81,19 @@ class home extends State<AL3omal> {
                       List.generate(snapshot.data!.data!.length, (index) {
                         final y = snapshot.data!.data![index].attributes!.name.toString();
                         final x = snapshot.data!.data![index].attributes!.job.toString();
+                        final z= index+1;
 
                         return DataRow(cells: [
-                        DataCell(Container( child: IconButton(onPressed: (){
-                          setState(() {
 
-                          });
-                        },
-                        icon: Icon(Icons.edit),))),
+                          DataCell(Container(child: Text('${z}'))),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                          DataCell(Container( child: Text("${x}"))),
+                          DataCell(Container( child: Text("${y}")),onTap: (){
+
+                          }),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                          DataCell(Container(child: Text('${y}'))),
+                          DataCell(Container(child: Text('${x}'))),
+                          DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
 
                         ]);
                       }),

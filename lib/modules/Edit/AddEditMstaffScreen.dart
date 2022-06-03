@@ -3,22 +3,21 @@ import 'package:flutter/material.dart';
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
-import '../../models/modelStaff.dart';
+import '../../models/Mstaffmodel.dart';
 import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpPost.dart';
-class AddEditAstaffScreen extends StatefulWidget {
-  const AddEditAstaffScreen({Key? key}) : super(key: key);
+class AddEditMstaffScreen extends StatefulWidget {
+  const AddEditMstaffScreen({Key? key}) : super(key: key);
 
   @override
-  _AddEditAstaffScreenState createState() => _AddEditAstaffScreenState();
+  _AddEditMstaffScreenState createState() => _AddEditMstaffScreenState();
 }
 
-class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
-  @override
+class _AddEditMstaffScreenState extends State<AddEditMstaffScreen> {
   TextEditingController _NameController= TextEditingController();
   TextEditingController _JobController= TextEditingController();
 
-  late Future<Astaff> astaff;
+  late Future<Mstaff> mstaff;
   String AlertText= ' ';
   final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
@@ -26,10 +25,10 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    astaff =GetAstaff();
+    mstaff =GetMstaff();
 
   }
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +43,7 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
           ),),
         titleSpacing: 0,
 
-        title:Text('أضف الى العاملين',style: TextStyle(fontWeight: FontWeight.bold,
+        title:Text('أضف الى الاداريين',style: TextStyle(fontWeight: FontWeight.bold,
             color: Color(0xFFF1770D)),),
       ),
       body: Padding(
@@ -54,14 +53,14 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
           child: Column(children: [
             SizedBox(height: 30,),
             DefaultTextField(
-              controller: _NameController,
-              validate: (value) {
-                if (value!.isEmpty) {
-                  return 'ادخل بعض البيانات';
-                }
-                return null;
-              },
-              text: 'الأسم'
+                controller: _NameController,
+                validate: (value) {
+                  if (value!.isEmpty) {
+                    return 'ادخل بعض البيانات';
+                  }
+                  return null;
+                },
+                text: 'الأسم'
 
             ),
             SizedBox(height: 30,),
@@ -86,10 +85,10 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
                   final FormState? form = formKey.currentState;
                   if(form!.validate())
                   {
-                    astaff = PostAstaff(_NameController.text, _JobController.text);
+                    mstaff = PostMstaff(_NameController.text, _JobController.text);
                     AlertText = 'تم الاضافة';
                     Navigator.pop(context);
-                    
+
                   }
                   else
                   {
