@@ -6,6 +6,7 @@ import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../network/http/HttpPost.dart';
+import '../ScreenPageDrawer/العام الاكاديمي.dart';
 class AddEditOneYearScreen extends StatefulWidget {
   const AddEditOneYearScreen({Key? key}) : super(key: key);
 
@@ -74,8 +75,9 @@ class _AddEditOneYearScreenState extends State<AddEditOneYearScreen> {
                   {
                     oneyear=PostOneYear(_YearController.text);
                     AlertText = 'تم الاضافة';
-                    Navigator.pop(context);
-                  }
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new Al3am_Alacademy()))
+                        .then((value) => setState(() {}));                  }
                   else
                   {
                     AlertText = 'ادخل بعض البيانات';

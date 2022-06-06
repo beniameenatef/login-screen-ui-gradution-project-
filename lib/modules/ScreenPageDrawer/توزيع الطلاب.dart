@@ -33,7 +33,7 @@ class _Tawzee3AltolapState extends State<Tawzee3Altolap> {
         leading:
         IconButton(onPressed: ()
         {
-          Navigator.pop(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
             ),

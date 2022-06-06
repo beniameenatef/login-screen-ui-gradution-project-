@@ -9,6 +9,7 @@ import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/توزيع الطلاب.dart';
 class AddEditStudentDistributionScreen extends StatefulWidget {
   const AddEditStudentDistributionScreen({Key? key}) : super(key: key);
 
@@ -260,8 +261,9 @@ class _AddEditStudentDistributionScreenState extends State<AddEditStudentDistrib
                               {
                                 studentdistribution=PostStudentDistribution(id!,int.parse(_LevelController.text) , _MaleController.text, _FemaleController.text, _CSController.text, _ISController.text, _AIController.text, _NIController.text, _GeneralController.text);
                                 AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
-
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => new Tawzee3Altolap()))
+                                    .then((value) => setState(() {}));
                               }
                               else
                               {

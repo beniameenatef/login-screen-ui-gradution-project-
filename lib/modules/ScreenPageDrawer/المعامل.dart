@@ -33,7 +33,7 @@ class _Alma3amelState extends State<Alma3amel> {
         leading:
         IconButton(onPressed: ()
         {
-          Navigator.pop(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
             ),
@@ -127,6 +127,7 @@ class _Alma3amelState extends State<Alma3amel> {
           setState(() {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AddEditLabScreen()));
+                // .then((value) => setState(() {}));
           });    },
         backgroundColor: AppColors.blue,
         child: const Icon(Icons.add),

@@ -10,6 +10,7 @@ import '../../constant/colors.dart';
 import '../../models/Mstaffmodel.dart';
 import '../../models/surveymodel.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/عناصر الاستطلاعات.dart';
 class AddEditSurveyItemScreen extends StatefulWidget {
   const AddEditSurveyItemScreen({Key? key}) : super(key: key);
 
@@ -167,8 +168,9 @@ class _AddEditSurveyItemScreenState extends State<AddEditSurveyItemScreen> {
                               {
                                 surveyitems = PostSurveyItem(_DescriptionController.text, id!);
                                 AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
-
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => new anaserAlasttla3at()))
+                                    .then((value) => setState(() {}));
                               }
                               else
                               {

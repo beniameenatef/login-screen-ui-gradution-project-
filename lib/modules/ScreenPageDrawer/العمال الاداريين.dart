@@ -32,7 +32,7 @@ class _El3omalelEdareenState extends State<El3omalelEdareen> {
         leading:Padding(padding: EdgeInsetsDirectional.only(start: 10),
           child:IconButton(onPressed: ()
           {
-            Navigator.pop(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
               ),

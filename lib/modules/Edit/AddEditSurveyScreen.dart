@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
+import '../ScreenPageDrawer/الاستطلاعات.dart';
 class AddEditSurveyScreen extends StatefulWidget {
   const AddEditSurveyScreen({Key? key}) : super(key: key);
 
@@ -74,8 +75,9 @@ class _AddEditSurveyScreenState extends State<AddEditSurveyScreen> {
                   {
                     survey = PostSurvey(_STypeController.text);
                     AlertText = 'تم الاضافة';
-                    Navigator.pop(context);
-                  }
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new Alasttla3at()))
+                        .then((value) => setState(() {}));                  }
                   else
                   {
                     AlertText = 'ادخل بعض البيانات';

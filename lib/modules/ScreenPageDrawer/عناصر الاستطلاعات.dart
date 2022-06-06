@@ -33,7 +33,7 @@ class _anaserAlasttla3atState extends State<anaserAlasttla3at> {
         leading:
         IconButton(onPressed: ()
         {
-          Navigator.pop(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
             ),

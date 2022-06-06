@@ -1,3 +1,4 @@
+import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%85%D9%84.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +49,9 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
             child:IconButton(onPressed: ()
             {
               Navigator.pop(context);
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const Alma3amel()),
+              // );
 
             },icon: Icon(Icons.arrow_back_ios,color: Color(0xFFF1770D),),
             ),),
@@ -180,17 +184,22 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
                               {
                                 lab = PostLab(_LabNumberController.text, _PCNumberController.text, id!);
                                 AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
-
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => new Alma3amel()))
+                                    .then((value) => setState(() {}));
                               }
                               else
                               {
+
                                 AlertText = 'ادخل بعض البيانات';
                               }
 
                             });
-
-                          },
+                            // Navigator.pop(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => Alma3amel()),
+                            // );
+                          }
                         ),
                         SizedBox(height: 10,),
                         Text('${AlertText}'),

@@ -32,7 +32,7 @@ class _Anwa3elkotbState extends State<Anwa3elkotb> {
         leading:Padding(padding: EdgeInsetsDirectional.only(start: 10),
           child:IconButton(onPressed: ()
           {
-            Navigator.pop(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
               ),

@@ -18,3 +18,11 @@ class qualitydataerrorstate extends qualityhomestates {
 
   qualitydataerrorstate(this.error);
 }
+
+class qualitypostlibraryloadingstate extends qualityhomestates {}
+class qualitypostlibrarysuccessstate extends qualityhomestates {}
+class qualitypostlibraryerrorstate extends qualityhomestates {
+  final String ?error;
+
+  qualitypostlibraryerrorstate(this.error);
+}

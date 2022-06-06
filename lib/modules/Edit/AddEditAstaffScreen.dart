@@ -6,6 +6,7 @@ import '../../constant/colors.dart';
 import '../../models/modelStaff.dart';
 import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpPost.dart';
+import '../ScreenPageDrawer/العمال الاكادميين .dart';
 class AddEditAstaffScreen extends StatefulWidget {
   const AddEditAstaffScreen({Key? key}) : super(key: key);
 
@@ -88,8 +89,9 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
                   {
                     astaff = PostAstaff(_NameController.text, _JobController.text);
                     AlertText = 'تم الاضافة';
-                    Navigator.pop(context);
-                    
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new AL3omal()))
+                        .then((value) => setState(() {}));
                   }
                   else
                   {

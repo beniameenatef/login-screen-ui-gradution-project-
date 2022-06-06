@@ -35,7 +35,7 @@ class _a3dadAl5rgeenState extends State<a3dadAl5rgeen> {
         leading:
           IconButton(onPressed: ()
           {
-            Navigator.pop(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
               ),

@@ -9,6 +9,7 @@ import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/نشاط الطلاب.dart';
 class AddEditStudentActivityScreen extends StatefulWidget {
   const AddEditStudentActivityScreen({Key? key}) : super(key: key);
 
@@ -190,8 +191,9 @@ class _AddEditStudentActivityScreenState extends State<AddEditStudentActivityScr
                               {
                                 studentactivity=PostStudentActivity(_TotalController.text, _NumberController.text, _PercentageController.text, id!);
                                 AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
-
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => new NashatAtolap()))
+                                    .then((value) => setState(() {}));
                               }
                               else
                               {
