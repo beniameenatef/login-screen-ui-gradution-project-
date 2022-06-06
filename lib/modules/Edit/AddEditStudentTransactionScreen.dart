@@ -10,6 +10,7 @@ import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/معاملات الطلاب.dart';
 class AddEditStudentTransactionScreen extends StatefulWidget {
   const AddEditStudentTransactionScreen({Key? key}) : super(key: key);
 
@@ -254,8 +255,9 @@ class _AddEditStudentTransactionScreenState extends State<AddEditStudentTransact
                               {
                                 AlertText = 'ادخل بعض البيانات';
                               }
-                              Navigator.pop(context);
-
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => new Mo3amalatALtolap()))
+                                  .then((value) => setState(() {}));
                             });
 
                           },

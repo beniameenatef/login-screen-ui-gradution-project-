@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
+import '../ScreenPageDrawer/البرتوكول.dart';
 class AddEditProtocolScreen extends StatefulWidget {
   const AddEditProtocolScreen({Key? key}) : super(key: key);
 
@@ -168,8 +169,9 @@ class _AddEditProtocolScreenState extends State<AddEditProtocolScreen> {
                               {
                                 protocol = PostProtocol(_NameController.text, id!);
                                 AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
-
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => new Alprotocol()))
+                                    .then((value) => setState(() {}));
                               }
                               else
                               {

@@ -33,7 +33,7 @@ class _Alasttla3atState extends State<Alasttla3at> {
         leading:
         IconButton(onPressed: ()
         {
-          Navigator.pop(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
             ),

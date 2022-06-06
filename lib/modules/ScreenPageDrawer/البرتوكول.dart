@@ -33,7 +33,7 @@ class _AlprotocolState extends State<Alprotocol> {
         leading:
         IconButton(onPressed: ()
         {
-          Navigator.pop(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
             ),

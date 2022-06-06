@@ -9,6 +9,7 @@ import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/الابحاث.dart';
 class AddEditResearchScreen extends StatefulWidget {
   const AddEditResearchScreen({Key? key}) : super(key: key);
 
@@ -165,8 +166,9 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
                               {
                                 research=PostResearch(_NameController.text, id!);
                                 AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
-
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => new Alab7as()))
+                                    .then((value) => setState(() {}));
                               }
                               else
                               {

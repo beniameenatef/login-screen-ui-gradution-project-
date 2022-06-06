@@ -33,7 +33,7 @@ class _Mo3amalatALtolapState extends State<Mo3amalatALtolap> {
         leading:
         IconButton(onPressed: ()
         {
-          Navigator.pop(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
             ),

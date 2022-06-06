@@ -34,7 +34,7 @@ class _Al3am_AlacademyState extends State<Al3am_Alacademy> {
         leading:
         IconButton(onPressed: ()
         {
-          Navigator.pop(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
             ),

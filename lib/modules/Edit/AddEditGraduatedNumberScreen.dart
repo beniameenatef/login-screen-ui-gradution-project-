@@ -9,6 +9,7 @@ import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/اعداد الخريجين.dart';
 class AddEditGraduatedNumberScreen extends StatefulWidget {
   const AddEditGraduatedNumberScreen({Key? key}) : super(key: key);
 
@@ -207,8 +208,9 @@ class _AddEditGraduatedNumberScreenState extends State<AddEditGraduatedNumberScr
                               {
                                 graduatednumber=PostGraduatedNumber(id!, _CSController.text, _ISController.text, _AIController.text, _NIController.text);
                                 AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
-
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => new a3dadAl5rgeen()))
+                                    .then((value) => setState(() {}));
                               }
                               else
                               {

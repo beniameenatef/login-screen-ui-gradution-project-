@@ -6,6 +6,7 @@ import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../network/http/HttpGet.dart';
+import '../ScreenPageDrawer/انواع الكتب.dart';
 class AddEditBookTypeScreen extends StatefulWidget {
   const AddEditBookTypeScreen({Key? key}) : super(key: key);
 
@@ -74,8 +75,9 @@ class _AddEditBookTypeScreenState extends State<AddEditBookTypeScreen> {
                   {
                     booktype = PostBookType(_BookTypeController.text);
                     AlertText = 'تم الاضافة';
-                    Navigator.pop(context);
-                  }
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new Anwa3elkotb()))
+                        .then((value) => setState(() {}));                  }
                   else
                   {
                     AlertText = 'ادخل بعض البيانات';
