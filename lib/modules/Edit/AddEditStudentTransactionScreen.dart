@@ -1,6 +1,7 @@
 import 'package:design_ui/models/studenttransactionmodel.dart';
 import 'package:design_ui/models/surveyitemmodel.dart';
 import 'package:design_ui/network/http/HttpPost.dart';
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,10 @@ import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/معاملات الطلاب.dart';
 class AddEditStudentTransactionScreen extends StatefulWidget {
-  const AddEditStudentTransactionScreen({Key? key}) : super(key: key);
+  const AddEditStudentTransactionScreen({Key? key,this.object}) : super(key: key);
+  final StudentTransactionData? object;
 
   @override
   _AddEditStudentTransactionScreenState createState() => _AddEditStudentTransactionScreenState();
@@ -39,6 +42,12 @@ class _AddEditStudentTransactionScreenState extends State<AddEditStudentTransact
     year = GetOneYears();
     studenttransaction=GetStudentTransaction();
     surveyitems =GetSurveyItem();
+    _PercentageController= TextEditingController(text: widget.object?.attributes!.Percentage.toString());
+    selectedValue=widget.object?.attributes?.academicYear?.data?.attributes?.Year;
+    selectedValue2=widget.object?.attributes?.surveyItem?.data?.attributes?.Description;
+    id=widget.object?.attributes?.academicYear?.data?.id;
+    id2=widget.object?.attributes?.surveyItem?.data?.id;
+
 
   }
   @override
@@ -56,8 +65,10 @@ class _AddEditStudentTransactionScreenState extends State<AddEditStudentTransact
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى معاملات الطلاب',style: TextStyle(fontWeight: FontWeight.bold,
-              color: Color(0xFFF1770D)),),
+          title:(widget.object?.id == null)? Text('أضف الى معاملات الطلاب',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text('تعديل معاملات الطلاب',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),)
         ),
         body: FutureBuilder(
             future: Future.wait([year,surveyitems]),
@@ -239,22 +250,36 @@ class _AddEditStudentTransactionScreenState extends State<AddEditStudentTransact
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id==null)?'أضف':'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
                             setState(() {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                studenttransaction=PostStudentTransaction(int.parse(_PercentageController.text), id!, id2!);
-                                AlertText = 'تم الاضافة';
+                              if(widget.object?.id==null)  {
+                                if(form!.validate())
+                                {
+                                  studenttransaction = PostStudentTransaction(int.parse(_PercentageController.text),id!,id2!);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Mo3amalatALtolap()));                    }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
+
                               }
-                              else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
+                              else{
+                                if(form!.validate())
+                                {
+                                  studenttransaction =  PutStudentTransaction(widget.object!.id!,int.parse(_PercentageController.text),id!,id2!);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Mo3amalatALtolap()));
+
+                                }
+
                               }
-                              Navigator.pop(context);
 
                             });
 

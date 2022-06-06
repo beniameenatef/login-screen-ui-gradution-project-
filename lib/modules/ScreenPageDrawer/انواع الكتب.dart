@@ -1,4 +1,5 @@
 import 'package:design_ui/models/bookTypemodel.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,9 @@ class _Anwa3elkotbState extends State<Anwa3elkotb> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('BOOK TYPE')),
                           DataColumn(label: Text(' ')),
-                          DataColumn(label: Text('Edit')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
+
 
 
 
@@ -85,14 +88,27 @@ class _Anwa3elkotbState extends State<Anwa3elkotb> {
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${y}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                            DataCell(Container( child: IconButton(onPressed: (){
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
+
                               setState(() {
+                                DeleteBookType(snapshot.data!.data![index].id);
+                                booktype= GetBookType();
 
                               });
-                            },
-                              icon: Icon(Icons.edit),))),
 
-                          ]);
+
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditBookTypeScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

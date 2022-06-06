@@ -2,6 +2,7 @@
 import 'package:design_ui/models/studentactivitymodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,8 @@ class _NashatAtolapState extends State<NashatAtolap> {
                         DataColumn(label: Text(' ')),
                         DataColumn(label: Text('النسبة')),
                         DataColumn(label: Text(' ')),
+                        DataColumn(label: Text('Delete'),),
+                        DataColumn(label: Text(' ')),
 
 
                       ],
@@ -87,17 +90,34 @@ class _NashatAtolapState extends State<NashatAtolap> {
 
                           DataCell(Container(child: Text('${y}'))),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                          DataCell(Container( child: Text("${x}")),onTap: (){
-
-                          }),
+                          DataCell(Container( child: Text("${x}"))),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                           DataCell(Container(child: Text('${z}'))),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                           DataCell(Container(child: Text('${a}%'))),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                          DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                          {
+
+                            setState(() {
+                              DeleteStudentActivity(snapshot.data!.data![index].id);
+                              studentactivity= GetStudentActivity();
+
+                            });
 
 
-                        ]);
+                          }))),
+                          DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+
+                        ],
+                            onLongPress: (){
+                              setState(() {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => AddEditStudentActivityScreen(object:snapshot.data!.data![index])));
+                              });
+                            }
+                        );
                       }),
                     ),
                   ],

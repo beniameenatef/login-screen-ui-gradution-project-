@@ -18,13 +18,13 @@ class Mstaff {
   Meta? meta;
 
   factory Mstaff.fromJson(Map<String, dynamic> json) => Mstaff(
-    data: List<Dattum>.from(json["data"].map((x) => Dattum.fromJson(x))),
-    meta: Meta.fromJson(json["meta"]),
+    data: json["data"] == null ? null : List<Dattum>.from(json["data"]?.map((x) => Dattum.fromJson(x))),
+    meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-    "meta": meta?.toJson(),
+    "data": data == null ? null : List<dynamic>.from(data!.map((x) => x.toJson())),
+    "meta": meta == null ? null : meta!.toJson(),
   };
 }
 
@@ -38,13 +38,13 @@ class Dattum {
   Attributes? attributes;
 
   factory Dattum.fromJson(Map<String, dynamic> json) => Dattum(
-    id: json["id"],
-    attributes: Attributes.fromJson(json["attributes"]),
+    id: json["id"] == null ? null : json["id"],
+    attributes: json["attributes"] == null ? null : Attributes.fromJson(json["attributes"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "attributes": attributes?.toJson(),
+    "id": id == null ? null : id,
+    "attributes": attributes == null ? null : attributes!.toJson(),
   };
 }
 
@@ -64,19 +64,19 @@ class Attributes {
   DateTime? publishedAt;
 
   factory Attributes.fromJson(Map<String, dynamic> json) => Attributes(
-    name: json["Name"],
-    job: json["Job"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-    publishedAt: DateTime.parse(json["publishedAt"]),
+    name: json["Name"] == null ? null : json["Name"],
+    job: json["Job"] == null ? null : json["Job"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    publishedAt: json["publishedAt"] == null ? null : DateTime.parse(json["publishedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "Name": name,
-    "Job": job,
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "publishedAt": publishedAt?.toIso8601String(),
+    "Name": name == null ? null : name,
+    "Job": job == null ? null : job,
+    "createdAt": createdAt == null ? null : createdAt!.toIso8601String(),
+    "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
+    "publishedAt": publishedAt == null ? null : publishedAt!.toIso8601String(),
   };
 }
 
@@ -88,11 +88,11 @@ class Meta {
   Pagination? pagination;
 
   factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-    pagination: Pagination.fromJson(json["pagination"]),
+    pagination: json["pagination"] == null ? null : Pagination.fromJson(json["pagination"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "pagination": pagination?.toJson(),
+    "pagination": pagination == null ? null : pagination!.toJson(),
   };
 }
 
@@ -110,16 +110,16 @@ class Pagination {
   int? total;
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-    page: json["page"],
-    pageSize: json["pageSize"],
-    pageCount: json["pageCount"],
-    total: json["total"],
+    page: json["page"] == null ? null : json["page"],
+    pageSize: json["pageSize"] == null ? null : json["pageSize"],
+    pageCount: json["pageCount"] == null ? null : json["pageCount"],
+    total: json["total"] == null ? null : json["total"],
   );
 
   Map<String, dynamic> toJson() => {
-    "page": page,
-    "pageSize": pageSize,
-    "pageCount": pageCount,
-    "total": total,
+    "page": page == null ? null : page,
+    "pageSize": pageSize == null ? null : pageSize,
+    "pageCount": pageCount == null ? null : pageCount,
+    "total": total == null ? null : total,
   };
 }

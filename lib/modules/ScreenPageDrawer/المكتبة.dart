@@ -1,6 +1,7 @@
 import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,10 @@ class home extends State<Almaktba> {
                           DataColumn(label: Text('Book Type')),
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('Number')),
+                          DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
+
                         ],
                         rows: List.generate(snapshot.data!.data!.length, (index) {
                           dynamic y = snapshot.data!.data![index].attributes!.academicYear!.data!.attributes!.year.toString();
@@ -108,8 +113,28 @@ class home extends State<Almaktba> {
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: (x == Null)? Text(' '):Text('${x}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                            DataCell(Container(child: (z == Null)? Text(" "):Text('${z}')))
-                          ]);
+                            DataCell(Container(child: (z == Null)? Text(" "):Text('${z}'))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
+
+                              setState(() {
+                                DeleteLibrary(snapshot.data!.data![index].id);
+                                library= GetLibrary();
+
+                              });
+
+
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditLibraryScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

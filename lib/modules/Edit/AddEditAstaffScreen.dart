@@ -6,8 +6,11 @@ import '../../constant/colors.dart';
 import '../../models/modelStaff.dart';
 import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpPost.dart';
+import '../../network/http/HttpPut.dart';
+import '../ScreenPageDrawer/العمال الاكادميين .dart';
 class AddEditAstaffScreen extends StatefulWidget {
-  const AddEditAstaffScreen({Key? key}) : super(key: key);
+  const AddEditAstaffScreen({Key? key,this.object}) : super(key: key);
+  final Datum? object;
 
   @override
   _AddEditAstaffScreenState createState() => _AddEditAstaffScreenState();
@@ -27,6 +30,8 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
     // TODO: implement initState
     super.initState();
     astaff =GetAstaff();
+    _NameController= TextEditingController(text: widget.object?.attributes!.name);
+    _JobController= TextEditingController(text: widget.object?.attributes!.job);
 
   }
 
@@ -44,8 +49,10 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
           ),),
         titleSpacing: 0,
 
-        title:Text('أضف الى العاملين',style: TextStyle(fontWeight: FontWeight.bold,
-            color: Color(0xFFF1770D)),),
+        title:(widget.object?.id == null)? Text('أضف الى العامليين',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),):
+        Text('تعديل العامليين',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),)
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -78,22 +85,35 @@ class _AddEditAstaffScreenState extends State<AddEditAstaffScreen> {
             ),
             SizedBox(height: 30,),
             DefaultButton(
-              text: 'أضف',
+              text: (widget.object?.id==null)?'أضف':'تعديل',
               color: AppColors.blue,
               onpressed:() {
                 setState(() {
 
                   final FormState? form = formKey.currentState;
-                  if(form!.validate())
-                  {
-                    astaff = PostAstaff(_NameController.text, _JobController.text);
-                    AlertText = 'تم الاضافة';
-                    Navigator.pop(context);
-                    
+                  if(widget.object?.id==null)  {
+                    if(form!.validate())
+                    {
+                      astaff = PostAstaff(_NameController.text, _JobController.text);
+                      AlertText = 'تم الاضافة';
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => new AL3omal()));                    }
+                    else
+                    {
+                      AlertText = 'ادخل بعض البيانات';
+                    }
+
                   }
-                  else
-                  {
-                    AlertText = 'ادخل بعض البيانات';
+                  else{
+                    if(form!.validate())
+                    {
+                      astaff =  PutAstaff(widget.object!.id!,_NameController.text, _JobController.text);
+                      AlertText = 'تم التعديل';
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => new AL3omal()));
+
+                    }
+
                   }
 
                 });

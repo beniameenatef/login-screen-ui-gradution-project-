@@ -5,15 +5,19 @@ import 'package:design_ui/models/modelMaktba.dart';
 import 'package:design_ui/models/oneyearmodel.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:design_ui/network/http/HttpPost.dart';
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/المكتبة.dart';
 
 class AddEditLibraryScreen extends StatefulWidget {
-  const AddEditLibraryScreen({Key? key}) : super(key: key);
+  const AddEditLibraryScreen({Key? key,this.object}) : super(key: key);
+  final Datum? object;
+
 
   @override
   _AddEditLibraryScreenState createState() => _AddEditLibraryScreenState();
@@ -43,6 +47,12 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
     year = GetOneYears();
     booktype=GetBookType();
     library =GetLibrary();
+    _NumberController= TextEditingController(text: widget.object?.attributes!.number);
+    selectedValue=widget.object?.attributes?.academicYear?.data?.attributes?.year;
+    selectedValue2=widget.object?.attributes?.bookType?.data?.attributes?.type;
+    id=widget.object?.attributes?.academicYear?.data?.id;
+    id2=widget.object?.attributes?.bookType?.data?.id;
+
 
   }
   Widget build(BuildContext context) {
@@ -59,8 +69,10 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
           ),),
         titleSpacing: 0,
 
-        title:Text('أضف الى المكتبة',style: TextStyle(fontWeight: FontWeight.bold,
-            color: Color(0xFFF1770D)),),
+        title:(widget.object?.id == null)? Text('أضف الى المكتبة',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),):
+        Text('تعديل المكتبة',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),)
       ),
       body: FutureBuilder(
         future: Future.wait([year,booktype]),
@@ -242,22 +254,39 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
             ),
           SizedBox(height: 30,),
           DefaultButton(
-          text: 'أضف',
+            text: (widget.object?.id==null)?'أضف':'تعديل',
           color: AppColors.blue,
           onpressed:() {
           setState(() {
 
-          final FormState? form = formKey.currentState;
-          if(form!.validate())
-          {
-          library=PostLibrary(int.parse(_NumberController.text), id!, id2!);
-          AlertText = 'تم الاضافة';
-          }
-          else
-          {
-          AlertText = 'ادخل بعض البيانات';
-          }
-          Navigator.pop(context);
+            final FormState? form = formKey.currentState;
+            if(widget.object?.id==null)  {
+              if(form!.validate())
+              {
+                library = PostLibrary(int.parse(_NumberController.text),id!,id2!);
+                AlertText = 'تم الاضافة';
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => new Almaktba()));                    }
+              else
+              {
+                AlertText = 'ادخل بعض البيانات';
+              }
+
+            }
+            else{
+              if(form!.validate())
+              {
+
+                // id = data;
+                // id = data;
+                library =  PutLibrary(widget.object!.id!,int.parse(_NumberController.text),id!,id2!);
+                AlertText = 'تم التعديل';
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => new Almaktba()));
+
+              }
+
+            }
 
           });
 

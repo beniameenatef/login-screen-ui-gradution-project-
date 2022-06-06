@@ -2,6 +2,7 @@
 import 'package:design_ui/models/surveyitemmodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -75,6 +76,9 @@ class _anaserAlasttla3atState extends State<anaserAlasttla3at> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('النوع ')),
                           DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
+
 
 
 
@@ -91,16 +95,33 @@ class _anaserAlasttla3atState extends State<anaserAlasttla3at> {
 
                             DataCell(Container(child: Text('${b}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                            DataCell(Container( child: Text("${a}")),onTap: (){
-
-                            }),
+                            DataCell(Container( child: Text("${a}"))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${c}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
+
+                              setState(() {
+                                DeleteSurveyItem(snapshot.data!.data![index].id);
+                                surveyitem= GetSurveyItem();
+
+                              });
+
+
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
 
 
 
-                          ]);
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditSurveyItemScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

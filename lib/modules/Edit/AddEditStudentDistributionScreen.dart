@@ -8,9 +8,12 @@ import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpGet.dart';
+import '../../network/http/HttpPut.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/توزيع الطلاب.dart';
 class AddEditStudentDistributionScreen extends StatefulWidget {
-  const AddEditStudentDistributionScreen({Key? key}) : super(key: key);
+  const AddEditStudentDistributionScreen({Key? key,this.object}) : super(key: key);
+  final Datum? object;
 
   @override
   _AddEditStudentDistributionScreenState createState() => _AddEditStudentDistributionScreenState();
@@ -44,6 +47,16 @@ class _AddEditStudentDistributionScreenState extends State<AddEditStudentDistrib
     super.initState();
     year = GetOneYears();
     studentdistribution =GetStudentDistrubtion();
+    _GeneralController= TextEditingController(text: widget.object?.attributes!.general?.number);
+    _NIController= TextEditingController(text: widget.object?.attributes!.ni?.number);
+    _AIController= TextEditingController(text: widget.object?.attributes!.ai?.number);
+    _ISController= TextEditingController(text: widget.object?.attributes!.attributesIs?.number);
+    _CSController= TextEditingController(text: widget.object?.attributes!.cs?.number);
+    _FemaleController= TextEditingController(text: widget.object?.attributes!.female);
+    _MaleController= TextEditingController(text: widget.object?.attributes!.male);
+    _LevelController= TextEditingController(text: widget.object?.attributes!.level.toString());
+    selectedValue=widget.object?.attributes?.year?.data?.attributes?.year;
+    id=widget.object?.attributes?.year?.data?.id;
 
   }
   @override
@@ -61,8 +74,10 @@ class _AddEditStudentDistributionScreenState extends State<AddEditStudentDistrib
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى توزيع الطلاب',style: TextStyle(fontWeight: FontWeight.bold,
-              color: Color(0xFFF1770D)),),
+          title:(widget.object?.id == null)? Text('أضف الى توزيع الطلاب',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text('تعديل توزيع الطلاب',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),)
         ),
         body: FutureBuilder<Oneyear>(
             future: year,
@@ -250,27 +265,41 @@ class _AddEditStudentDistributionScreenState extends State<AddEditStudentDistrib
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id==null)?'أضف':'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
                             setState(() {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                studentdistribution=PostStudentDistribution(id!,int.parse(_LevelController.text) , _MaleController.text, _FemaleController.text, _CSController.text, _ISController.text, _AIController.text, _NIController.text, _GeneralController.text);
-                                AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
+                              if(widget.object?.id==null)  {
+                                if(form!.validate())
+                                {
+                                  studentdistribution=PostStudentDistribution(id!,int.parse(_LevelController.text) , _MaleController.text, _FemaleController.text, _CSController.text, _ISController.text, _AIController.text, _NIController.text, _GeneralController.text);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Tawzee3Altolap()));                    }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
 
                               }
-                              else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
+                              else{
+                                if(form!.validate())
+                                {
+                                  studentdistribution=PutStudentDistribution(widget.object!.id!,id!,int.parse(_LevelController.text) , _MaleController.text, _FemaleController.text, _CSController.text, _ISController.text, _AIController.text, _NIController.text, _GeneralController.text);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Tawzee3Altolap()));
+
+                                }
+
                               }
 
                             });
 
                           },
+
                         ),
                         SizedBox(height: 10,),
                         Text('${AlertText}'),

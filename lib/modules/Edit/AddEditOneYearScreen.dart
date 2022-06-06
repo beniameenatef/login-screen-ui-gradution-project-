@@ -1,13 +1,17 @@
 import 'package:design_ui/models/oneyearmodel.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../network/http/HttpPost.dart';
+import '../ScreenPageDrawer/العام الاكاديمي.dart';
 class AddEditOneYearScreen extends StatefulWidget {
-  const AddEditOneYearScreen({Key? key}) : super(key: key);
+  const AddEditOneYearScreen({Key? key,this.object}) : super(key: key);
+  final Datumm? object;
+
 
   @override
   _AddEditOneYearScreenState createState() => _AddEditOneYearScreenState();
@@ -25,6 +29,8 @@ class _AddEditOneYearScreenState extends State<AddEditOneYearScreen> {
     // TODO: implement initState
     super.initState();
     oneyear =GetOneYears();
+    _YearController= TextEditingController(text: widget.object?.attributes?.year);
+
 
   }
   @override
@@ -42,8 +48,10 @@ class _AddEditOneYearScreenState extends State<AddEditOneYearScreen> {
           ),),
         titleSpacing: 0,
 
-        title:Text('أضف الى العام الاكاديمى',style: TextStyle(fontWeight: FontWeight.bold,
-            color: Color(0xFFF1770D)),),
+        title:(widget.object?.id == null)? Text('أضف الى العام الاكاديمى',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),):
+        Text('تعديل الى العام الاكاديمى',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),)
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -64,22 +72,37 @@ class _AddEditOneYearScreenState extends State<AddEditOneYearScreen> {
             ),
             SizedBox(height: 30,),
             DefaultButton(
-              text: 'أضف',
+              text: (widget.object?.id==null)?'أضف':'تعديل',
               color: AppColors.blue,
               onpressed:() {
                 setState(() {
 
                   final FormState? form = formKey.currentState;
-                  if(form!.validate())
-                  {
-                    oneyear=PostOneYear(_YearController.text);
-                    AlertText = 'تم الاضافة';
-                    Navigator.pop(context);
+                  if(widget.object?.id==null)  {
+                    if(form!.validate())
+                    {
+                      oneyear = PostOneYear(_YearController.text);
+                      AlertText = 'تم الاضافة';
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => new Al3am_Alacademy()));                    }
+                    else
+                    {
+                      AlertText = 'ادخل بعض البيانات';
+                    }
+
                   }
-                  else
-                  {
-                    AlertText = 'ادخل بعض البيانات';
+                  else{
+                    if(form!.validate())
+                    {
+                      oneyear =  PutOneYear(widget.object!.id!,_YearController.text);
+                      AlertText = 'تم التعديل';
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => new Al3am_Alacademy()));
+
+                    }
+
                   }
+
 
                 });
 

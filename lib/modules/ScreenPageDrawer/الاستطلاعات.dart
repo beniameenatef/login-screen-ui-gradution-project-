@@ -2,6 +2,7 @@
 import 'package:design_ui/models/surveymodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -68,6 +69,9 @@ class _Alasttla3atState extends State<Alasttla3at> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('نوع الاستطلاع')),
                           DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
+
 
 
 
@@ -83,14 +87,31 @@ class _Alasttla3atState extends State<Alasttla3at> {
 
                             DataCell(Container(child: Text('${b}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                            DataCell(Container( child: Text("${a}")),onTap: (){
+                            DataCell(Container( child: Text("${a}"))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
 
-                            }),
+                              setState(() {
+                                DeleteSurvey(snapshot.data!.data![index].id);
+                                survey= GetSurvey();
+
+                              });
+
+
+                            }))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
 
 
 
-                          ]);
+                          ],
+                              onLongPress: (){
+                            setState(() {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => AddEditSurveyScreen(object:snapshot.data!.data![index])));
+                            });
+                          }
+                          );
                         }),
                       ),
                     ],
@@ -118,7 +139,7 @@ class _Alasttla3atState extends State<Alasttla3at> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            Navigator.push(context,
+            Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => AddEditSurveyScreen()));
           });    },
         backgroundColor: AppColors.blue,

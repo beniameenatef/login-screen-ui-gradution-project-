@@ -1,6 +1,7 @@
 import 'package:design_ui/models/studentactivitymodel.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:design_ui/network/http/HttpPost.dart';
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +10,11 @@ import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/نشاط الطلاب.dart';
 class AddEditStudentActivityScreen extends StatefulWidget {
-  const AddEditStudentActivityScreen({Key? key}) : super(key: key);
+  const AddEditStudentActivityScreen({Key? key,this.object}) : super(key: key);
+  final Datum? object;
+
 
   @override
   _AddEditStudentActivityScreenState createState() => _AddEditStudentActivityScreenState();
@@ -34,6 +38,12 @@ class _AddEditStudentActivityScreenState extends State<AddEditStudentActivityScr
     super.initState();
     studentactivity = GetStudentActivity();
     year=GetOneYears();
+    _TotalController= TextEditingController(text: widget.object?.attributes!.total);
+    _NumberController= TextEditingController(text: widget.object?.attributes!.number);
+    _PercentageController= TextEditingController(text: widget.object?.attributes!.percentage.toString());
+    selectedValue=widget.object?.attributes?.year?.data?.attributes?.year;
+    id=widget.object?.attributes?.year?.data?.id;
+
 
   }
   @override
@@ -51,8 +61,10 @@ class _AddEditStudentActivityScreenState extends State<AddEditStudentActivityScr
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى الانشطة',style: TextStyle(fontWeight: FontWeight.bold,
-              color: Color(0xFFF1770D)),),
+          title:(widget.object?.id == null)? Text('أضف الى الانشطة',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text('تعديل الانشطة',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),)
         ),
         body: FutureBuilder<Oneyear>(
             future: year,
@@ -180,24 +192,36 @@ class _AddEditStudentActivityScreenState extends State<AddEditStudentActivityScr
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id==null)?'أضف':'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
                             setState(() {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                studentactivity=PostStudentActivity(_TotalController.text, _NumberController.text, _PercentageController.text, id!);
-                                AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
+                              if(widget.object?.id==null)  {
+                                if(form!.validate())
+                                {
+                                  studentactivity = PostStudentActivity(_TotalController.text,_NumberController.text,_PercentageController.text,id!);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new NashatAtolap()));                    }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
 
                               }
-                              else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
-                              }
+                              else{
+                                if(form!.validate())
+                                {
+                                  studentactivity =  PutStudentActivity(widget.object!.id!,_TotalController.text,_NumberController.text,_PercentageController.text,id!);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new NashatAtolap()));
 
+                                }
+
+                              }
                             });
 
                           },

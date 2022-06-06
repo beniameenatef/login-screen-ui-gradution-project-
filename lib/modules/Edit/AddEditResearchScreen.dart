@@ -8,9 +8,13 @@ import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
+import '../../network/http/HttpPut.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/الابحاث.dart';
 class AddEditResearchScreen extends StatefulWidget {
-  const AddEditResearchScreen({Key? key}) : super(key: key);
+  const AddEditResearchScreen({Key? key,this.object}) : super(key: key);
+  final ResearchesData? object;
+
 
   @override
   _AddEditResearchScreenState createState() => _AddEditResearchScreenState();
@@ -32,6 +36,9 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
     super.initState();
     research = GetResearch();
     year=GetOneYears();
+    _NameController= TextEditingController(text: widget.object?.attributes?.RName);
+    selectedValue=widget.object?.attributes?.year?.data?.attributes?.Year;
+
 
   }
   @override
@@ -49,7 +56,9 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى الابحاث',style: TextStyle(fontWeight: FontWeight.bold,
+          title:(widget.object?.id == null)? Text('أضف الى الابحاث',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text(' تعديل الابحاث',style: TextStyle(fontWeight: FontWeight.bold,
               color: Color(0xFFF1770D)),),
         ),
         body: FutureBuilder<Oneyear>(
@@ -155,22 +164,35 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id == null)? 'أضف' : 'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
-                            setState(() {
+                            setState(()  {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                research=PostResearch(_NameController.text, id!);
-                                AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
+                              if(widget.object?.id==null)  {
+                                if(form!.validate())
+                                {
+                                  research = PostResearch(_NameController.text,id!);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Alab7as()));                    }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
 
                               }
-                              else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
+                              else{
+                                if(form!.validate())
+                                {
+                                  research = PutResearch(widget!.object!.id!,_NameController.text,id!);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Alab7as()));
+
+                                }
+
                               }
 
                             });

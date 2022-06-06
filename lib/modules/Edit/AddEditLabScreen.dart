@@ -1,3 +1,4 @@
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,12 @@ import '../../network/http/HttpGet.dart';
 import '../../network/http/HttpPost.dart';
 import '../../network/http/HttpSearch.dart';
 import '../Drawer/drawer.dart';
+import '../ScreenPageDrawer/المعامل.dart';
 import '../datialesHomeScreen/detailshome.dart';
 class AddEditLabScreen extends StatefulWidget {
-  const AddEditLabScreen({Key? key}) : super(key: key);
+  const AddEditLabScreen({Key? key,this.object}) : super(key: key);
+  final Datum? object;
+
 
   @override
   _AddEditLabScreenState createState() => _AddEditLabScreenState();
@@ -36,6 +40,10 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
     super.initState();
     lab = GetLab();
     mstaff=GetMstaff();
+    _LabNumberController= TextEditingController(text: widget.object?.attributes!.labNumber);
+    _PCNumberController= TextEditingController(text: widget.object?.attributes!.pCnumber);
+    selectedValue=widget.object?.attributes?.mid?.data?.attributes?.name;
+
 
   }
   @override
@@ -53,8 +61,10 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى المعامل',style: TextStyle(fontWeight: FontWeight.bold,
-              color: Color(0xFFF1770D)),),
+          title:(widget.object?.id == null)? Text('أضف الى المعامل',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text('تعديل المعامل',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),)
         ),
         body: FutureBuilder<Mstaff>(
             future: mstaff,
@@ -110,7 +120,7 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
                                 ),
                               ],
                             ), items: mstaffs?.map((item) => DropdownMenuItem(
-                            value: item.attributes!.name,
+                            value: item!.attributes!.name,
                             child: Text(
                               ("${item.attributes!.name.toString()}"),
                               style: const TextStyle(
@@ -170,22 +180,35 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id==null)?'أضف':'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
                             setState(() {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                lab = PostLab(_LabNumberController.text, _PCNumberController.text, id!);
-                                AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
+                              if(widget.object?.id==null)  {
+                                if(form!.validate())
+                                {
+                                  lab = PostLab(_LabNumberController.text,_PCNumberController.text,id!);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Alma3amel()));                    }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
 
                               }
-                              else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
+                              else{
+                                if(form!.validate())
+                                {
+                                  lab =  PutLab(widget.object!.id!,_LabNumberController.text,_PCNumberController.text,id!);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Alma3amel()));
+
+                                }
+
                               }
 
                             });

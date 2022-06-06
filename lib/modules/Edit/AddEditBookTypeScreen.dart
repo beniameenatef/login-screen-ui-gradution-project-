@@ -1,13 +1,16 @@
 import 'package:design_ui/models/bookTypemodel.dart';
 import 'package:design_ui/network/http/HttpPost.dart';
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../network/http/HttpGet.dart';
+import '../ScreenPageDrawer/انواع الكتب.dart';
 class AddEditBookTypeScreen extends StatefulWidget {
-  const AddEditBookTypeScreen({Key? key}) : super(key: key);
+  const AddEditBookTypeScreen({Key? key,this.object}) : super(key: key);
+  final Ddatum? object;
 
   @override
   _AddEditBookTypeScreenState createState() => _AddEditBookTypeScreenState();
@@ -25,6 +28,8 @@ class _AddEditBookTypeScreenState extends State<AddEditBookTypeScreen> {
     // TODO: implement initState
     super.initState();
     booktype =GetBookType();
+    _BookTypeController= TextEditingController(text: widget.object?.attributes!.type);
+
 
   }
   @override
@@ -42,8 +47,10 @@ class _AddEditBookTypeScreenState extends State<AddEditBookTypeScreen> {
           ),),
         titleSpacing: 0,
 
-        title:Text('أضف الى انواع الكتب',style: TextStyle(fontWeight: FontWeight.bold,
-            color: Color(0xFFF1770D)),),
+        title:(widget.object?.id == null)? Text('أضف الى انواع الكتب',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),):
+        Text('تعديل انواع الكتب',style: TextStyle(fontWeight: FontWeight.bold,
+            color: Color(0xFFF1770D)),)
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -64,22 +71,37 @@ class _AddEditBookTypeScreenState extends State<AddEditBookTypeScreen> {
             ),
             SizedBox(height: 30,),
             DefaultButton(
-              text: 'أضف',
+              text: (widget.object?.id==null)?'أضف':'تعديل',
               color: AppColors.blue,
               onpressed:() {
                 setState(() {
 
                   final FormState? form = formKey.currentState;
-                  if(form!.validate())
-                  {
-                    booktype = PostBookType(_BookTypeController.text);
-                    AlertText = 'تم الاضافة';
-                    Navigator.pop(context);
+                  if(widget.object?.id==null)  {
+                    if(form!.validate())
+                    {
+                      booktype = PostBookType(_BookTypeController.text);
+                      AlertText = 'تم الاضافة';
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => new Anwa3elkotb()));                    }
+                    else
+                    {
+                      AlertText = 'ادخل بعض البيانات';
+                    }
+
                   }
-                  else
-                  {
-                    AlertText = 'ادخل بعض البيانات';
+                  else{
+                    if(form!.validate())
+                    {
+                      booktype =  PutBookType(widget.object!.id!,_BookTypeController.text);
+                      AlertText = 'تم التعديل';
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => new Anwa3elkotb()));
+
+                    }
+
                   }
+
 
                 });
 

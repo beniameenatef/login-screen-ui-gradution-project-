@@ -1,6 +1,7 @@
 
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/colors.dart';
@@ -72,6 +73,9 @@ class _Alma3amelState extends State<Alma3amel> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('العامل المسئول')),
                           DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
+
 
 
                         ],
@@ -95,9 +99,28 @@ class _Alma3amelState extends State<Alma3amel> {
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${a}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
+
+                              setState(() {
+                                DeleteLab(snapshot.data!.data![index].id);
+                                lab= GetLab();
+
+                              });
 
 
-                          ]);
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditLabScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

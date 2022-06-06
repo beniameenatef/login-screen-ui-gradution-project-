@@ -2,6 +2,7 @@
 import 'package:design_ui/models/protocolmodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,8 @@ class _AlprotocolState extends State<Alprotocol> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('النوع',style: TextStyle(color: AppColors.orange),)),
                           DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
                         ],
 
                         rows:
@@ -84,14 +87,31 @@ class _AlprotocolState extends State<Alprotocol> {
 
                             DataCell(Container(child: Text('${c}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                            DataCell(Container( child: Text("${a}")),onTap: (){
-
-                            }),
+                            DataCell(Container( child: Text("${a}"))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${b}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
 
-                          ]);
+                              setState(() {
+                                Deleteprotocol(snapshot.data!.data![index]!.id);
+                                protocol= Getprotocol();
+
+                              });
+
+
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditProtocolScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

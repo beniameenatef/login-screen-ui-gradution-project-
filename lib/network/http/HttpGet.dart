@@ -94,7 +94,7 @@ Future<GraduatedNumber> GetGraduatedNumbers() async {
     throw Exception('failed to get graduated number data');
   }
 }
-Future<Mstaff> GetMstaff() async {
+ Future<Mstaff> GetMstaff() async {
   final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/m-staffs'));
 
   if(response.statusCode==200){

@@ -2,6 +2,7 @@
 import 'package:design_ui/models/oneyearmodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/colors.dart';
@@ -68,6 +69,10 @@ class _Al3am_AlacademyState extends State<Al3am_Alacademy> {
                           DataColumn(label: Text('NO.')),
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('Year')),
+                          DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
+
 
                         ],
 
@@ -81,8 +86,29 @@ class _Al3am_AlacademyState extends State<Al3am_Alacademy> {
                             DataCell(Container( child: Text("${x}"))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${y}'))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
 
-                          ]);
+                              setState(() {
+                                DeleteOneYears(snapshot.data!.data![index].id);
+                                oneyear= GetOneYears();
+
+                              });
+
+
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditOneYearScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

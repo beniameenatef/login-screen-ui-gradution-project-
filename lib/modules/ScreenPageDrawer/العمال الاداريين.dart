@@ -1,3 +1,8 @@
+
+
+import 'dart:async';
+
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/colors.dart';
@@ -15,12 +20,15 @@ class El3omalelEdareen extends StatefulWidget {
 
 class _El3omalelEdareenState extends State<El3omalelEdareen> {
   late Future<Mstaff> mstaff;
+  late StreamSubscription<Mstaff> delete;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     mstaff= GetMstaff();
+    // delete=mstaff.listen((event) { ondelete;});
   }
 
   @override
@@ -69,6 +77,8 @@ class _El3omalelEdareenState extends State<El3omalelEdareen> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('المسمى الوظيفى')),
                           DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
 
 
                         ],
@@ -83,24 +93,44 @@ class _El3omalelEdareenState extends State<El3omalelEdareen> {
 
                             DataCell(Container(child: Text('${z}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                            DataCell(Container( child: Text("${y}")),onTap: (){
-
-                            }),
+                            DataCell(Container( child: Text("${y}"))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${x}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                             {
+
+                               setState(() {
+                                 DeleteMstaff(snapshot.data!.data![index].id);
+                                 mstaff= GetMstaff();
+
+                               });
 
 
-                          ]);
+                             }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+
+
+                          ],
+                            onLongPress: (){
+                              setState(() {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => AddEditMstaffScreen(object:snapshot.data!.data![index])));
+                              });
+                            }
+                          );
                         }),
                       ),
                     ],
                   )
               ),
             );
-          } else if (snapshot.hasError) {
+          }
+          else if (snapshot.hasError) {
             return Text('${snapshot.error}');
-          } else {
+          }
+          else {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -119,7 +149,7 @@ class _El3omalelEdareenState extends State<El3omalelEdareen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            Navigator.push(context,
+            Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => AddEditMstaffScreen()));
           });    },
         backgroundColor: AppColors.blue,
@@ -128,3 +158,4 @@ class _El3omalelEdareenState extends State<El3omalelEdareen> {
     );
   }
 }
+

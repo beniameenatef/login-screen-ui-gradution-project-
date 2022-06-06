@@ -1,6 +1,7 @@
 import 'package:design_ui/models/surveyitemmodel.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:design_ui/network/http/HttpPost.dart';
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,10 @@ import '../../constant/colors.dart';
 import '../../models/Mstaffmodel.dart';
 import '../../models/surveymodel.dart';
 import '../../network/http/HttpSearch.dart';
+import '../ScreenPageDrawer/عناصر الاستطلاعات.dart';
 class AddEditSurveyItemScreen extends StatefulWidget {
-  const AddEditSurveyItemScreen({Key? key}) : super(key: key);
+  const AddEditSurveyItemScreen({Key? key,this.object}) : super(key: key);
+  final Datuum? object;
 
   @override
   _AddEditSurveyItemScreenState createState() => _AddEditSurveyItemScreenState();
@@ -34,6 +37,10 @@ class _AddEditSurveyItemScreenState extends State<AddEditSurveyItemScreen> {
     super.initState();
     survey = GetSurvey();
     surveyitems=GetSurveyItem();
+    _DescriptionController= TextEditingController(text: widget.object?.attributes!.description);
+    selectedValue=widget.object?.attributes?.survey?.data?.attributes?.sType;
+    id=widget.object?.attributes?.survey?.data?.id;
+
 
   }
   @override
@@ -51,8 +58,10 @@ class _AddEditSurveyItemScreenState extends State<AddEditSurveyItemScreen> {
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى عناصر الاستطلاع',style: TextStyle(fontWeight: FontWeight.bold,
-              color: Color(0xFFF1770D)),),
+          title:(widget.object?.id == null)? Text('أضف الى عناصر الاستطلاع',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text('تعديل عناصر الاستطلاع',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),)
         ),
         body: FutureBuilder<Surveys>(
             future: survey,
@@ -157,24 +166,36 @@ class _AddEditSurveyItemScreenState extends State<AddEditSurveyItemScreen> {
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id==null)?'أضف':'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
                             setState(() {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                surveyitems = PostSurveyItem(_DescriptionController.text, id!);
-                                AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
+                              if(widget.object?.id==null)  {
+                                if(form!.validate())
+                                {
+                                  surveyitems = PostSurveyItem(_DescriptionController.text,id!);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new anaserAlasttla3at()));                    }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
 
                               }
-                              else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
-                              }
+                              else{
+                                if(form!.validate())
+                                {
+                                  surveyitems =  PutSurveyItem(widget.object!.id!,_DescriptionController.text,id!);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new anaserAlasttla3at()));
 
+                                }
+
+                              }
                             });
 
                           },

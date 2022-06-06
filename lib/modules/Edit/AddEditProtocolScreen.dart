@@ -2,6 +2,7 @@ import 'package:design_ui/models/protocolmodel.dart';
 import 'package:design_ui/models/protocoltype.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:design_ui/network/http/HttpPost.dart';
+import 'package:design_ui/network/http/HttpPut.dart';
 import 'package:design_ui/network/http/HttpSearch.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,11 @@ import 'package:flutter/material.dart';
 import '../../components/custom button.dart';
 import '../../components/text from.dart';
 import '../../constant/colors.dart';
+import '../ScreenPageDrawer/البرتوكول.dart';
 class AddEditProtocolScreen extends StatefulWidget {
-  const AddEditProtocolScreen({Key? key}) : super(key: key);
+  const AddEditProtocolScreen({Key? key,this.object}) : super(key: key);
+  final ProtocolData? object;
+
 
   @override
   _AddEditProtocolScreenState createState() => _AddEditProtocolScreenState();
@@ -35,6 +39,10 @@ class _AddEditProtocolScreenState extends State<AddEditProtocolScreen> {
     super.initState();
     protocol =Getprotocol();
     protocoltype=GetprotocolType();
+    _NameController= TextEditingController(text: widget.object?.attributes!.Name);
+    selectedValue=widget.object?.attributes?.protocolType?.data?.attributes?.pType;
+    id=widget.object?.attributes?.protocolType?.data?.id;
+
 
   }
   @override
@@ -52,8 +60,10 @@ class _AddEditProtocolScreenState extends State<AddEditProtocolScreen> {
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى البرتوكول',style: TextStyle(fontWeight: FontWeight.bold,
-              color: Color(0xFFF1770D)),),
+          title:(widget.object?.id == null)? Text('أضف الى البرتوكول',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text('تعديل البرتوكول',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),)
         ),
         body: FutureBuilder<ProtocolType>(
             future: protocoltype,
@@ -158,22 +168,35 @@ class _AddEditProtocolScreenState extends State<AddEditProtocolScreen> {
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id==null)?'أضف':'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
                             setState(() {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                protocol = PostProtocol(_NameController.text, id!);
-                                AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
+                              if(widget.object?.id==null)  {
+                                if(form!.validate())
+                                {
+                                  protocol = PostProtocol(_NameController.text, id!);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Alprotocol()));                    }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
 
                               }
-                              else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
+                              else{
+                                if(form!.validate())
+                                {
+                                  protocol =  PutProtocol(widget.object!.id!,_NameController.text, id!);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => new Alprotocol()));
+
+                                }
+
                               }
 
                             });

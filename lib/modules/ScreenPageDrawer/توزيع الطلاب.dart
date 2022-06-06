@@ -2,6 +2,7 @@
 import 'package:design_ui/models/studentdistribution.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -82,6 +83,8 @@ class _Tawzee3AltolapState extends State<Tawzee3Altolap> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('General')),
                           DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
 
 
                         ],
@@ -121,9 +124,28 @@ class _Tawzee3AltolapState extends State<Tawzee3Altolap> {
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${g}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
+
+                              setState(() {
+                                DeleteStudentDistrubtion(snapshot.data!.data![index].id);
+                                studentdistriubtion= GetStudentDistrubtion();
+
+                              });
 
 
-                          ]);
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditStudentDistributionScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

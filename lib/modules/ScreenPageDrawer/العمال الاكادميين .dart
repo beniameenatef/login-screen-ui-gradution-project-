@@ -1,6 +1,7 @@
 import 'package:design_ui/constant/line.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -73,6 +74,8 @@ class home extends State<AL3omal> {
                         DataColumn(label: Text(' ')),
                         DataColumn(label: Text('المسمى الوظيفى')),
                         DataColumn(label: Text(' ')),
+                        DataColumn(label: Text('Delete'),),
+                        DataColumn(label: Text(' ')),
 
 
                       ],
@@ -93,9 +96,28 @@ class home extends State<AL3omal> {
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                           DataCell(Container(child: Text('${x}'))),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                          DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                          {
+
+                            setState(() {
+                              DeleteAstaff(snapshot.data!.data![index].id);
+                              astaff= GetAstaff();
+
+                            });
 
 
-                        ]);
+                          }))),
+                          DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+
+                        ],
+                            onLongPress: (){
+                              setState(() {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => AddEditAstaffScreen(object:snapshot.data!.data![index])));
+                              });
+                            }
+                        );
                       }),
                     ),
                   ],

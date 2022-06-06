@@ -1,28 +1,53 @@
 import 'dart:convert';
-import 'package:design_ui/models/Research.dart';
-import 'package:design_ui/models/graduatednumbrmodel.dart';
-import 'package:design_ui/models/modelMaktba.dart';
-import 'package:design_ui/models/oneyearmodel.dart';
-import 'package:design_ui/models/protocolmodel.dart';
-import 'package:design_ui/models/studentactivitymodel.dart';
-import 'package:design_ui/models/studentdistribution.dart';
-import 'package:design_ui/models/studenttransactionmodel.dart';
-import 'package:design_ui/models/surveyitemmodel.dart';
-import 'package:design_ui/models/surveymodel.dart';
+
 import 'package:http/http.dart' as http;
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../models/Mstaffmodel.dart';
+import '../../models/Research.dart';
 import '../../models/bookTypemodel.dart';
+import '../../models/graduatednumbrmodel.dart';
 import '../../models/labmodel.dart';
+import '../../models/modelMaktba.dart';
 import '../../models/modelStaff.dart';
+import '../../models/oneyearmodel.dart';
+import '../../models/protocolmodel.dart';
+import '../../models/studentactivitymodel.dart';
+import '../../models/studentdistribution.dart';
+import '../../models/studenttransactionmodel.dart';
+import '../../models/surveyitemmodel.dart';
+import '../../models/surveymodel.dart';
 
+Future<Mstaff> PutMstaff( int id ,String name, String job) async {
 
-Future<Astaff> PostAstaff( String name, String job) async {
+  dynamic api = 'https://qms-application.herokuapp.com/api/m-staffs/${id}';
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/a-staffs';
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
+    //'Authorization' : 'xyz',
+    'Content-Type': 'application/json; charset=UTF-8',
+  },
+      body: jsonEncode(<String,dynamic>{
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+        "data":{
+          "Name": "${name.toString()}",
+          "Job": "${job.toString()}"
+        }
+
+      })
+  );
+
+  if (response.statusCode == 200) {
+    var data = jsonDecode(response.body.toString());
+    print(data);
+    return Mstaff.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to put mstaff.');
+  }
+}
+Future<Astaff> PutAstaff( int id ,String name, String job) async {
+
+  dynamic api = 'https://qms-application.herokuapp.com/api/a-staffs/${id}';
+
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -41,41 +66,15 @@ Future<Astaff> PostAstaff( String name, String job) async {
     print(data);
     return Astaff.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post astaff.');
-  }
-}
-Future<Mstaff> PostMstaff( String name, String job) async {
-
-  dynamic api = 'https://qms-application.herokuapp.com/api/m-staffs';
-
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
-    //'Authorization' : 'xyz',
-    'Content-Type': 'application/json; charset=UTF-8',
-  },
-      body: jsonEncode(<String,dynamic>{
-
-        "data":{
-          "Name": "${name.toString()}",
-          "Job": "${job.toString()}"
-        }
-
-      })
-  );
-
-  if (response.statusCode == 200) {
-    var data = jsonDecode(response.body.toString());
-    print(data);
-    return mstaffFromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to post mstaff.');
+    throw Exception('Failed to put astaff.');
   }
 }
 
-Future<Library> PostLibrary( int num, int idyear , int idbook) async {
+Future<Library> PutLibrary( int id ,int num, int idyear , int idbook) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/libraries?populate=deep,2';
+  dynamic api = 'https://qms-application.herokuapp.com/api/libraries/${id}?populate=deep,2';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -97,22 +96,22 @@ Future<Library> PostLibrary( int num, int idyear , int idbook) async {
     print(data);
     return Library.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post library.');
+    throw Exception('Failed to put library.');
   }
 }
-Future<Booktype> PostBookType(String name) async {
+Future<Booktype> PutBookType(int id,String name) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/book-types';
+  dynamic api = 'https://qms-application.herokuapp.com/api/book-types/${id}';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
       body: jsonEncode(<dynamic,dynamic>{
-          "data":{
-            "Type":name
+        "data":{
+          "Type":name
 
-          }
+        }
       })
   );
   if (response.statusCode == 200) {
@@ -120,14 +119,14 @@ Future<Booktype> PostBookType(String name) async {
     print(data);
     return Booktype.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post book type.');
+    throw Exception('Failed to put book type.');
   }
 }
-Future<Oneyear> PostOneYear(String year) async {
+Future<Oneyear> PutOneYear(int id ,String year) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/academic-years';
+  dynamic api = 'https://qms-application.herokuapp.com/api/academic-years/${id}';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -142,14 +141,14 @@ Future<Oneyear> PostOneYear(String year) async {
     print(data);
     return Oneyear.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post one year.');
+    throw Exception('Failed to put one year.');
   }
 }
-Future<GraduatedNumber> PostGraduatedNumber(int year,String cs , String Is,String ai , String ni) async {
+Future<GraduatedNumber> PutGraduatedNumber(int id ,int year,String cs , String Is,String ai , String ni) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/graduated-numbers?populate=deep,2';
+  dynamic api = 'https://qms-application.herokuapp.com/api/graduated-numbers/${id}?populate=deep,2';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -177,14 +176,14 @@ Future<GraduatedNumber> PostGraduatedNumber(int year,String cs , String Is,Strin
     print(data);
     return GraduatedNumber.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post graduated number.');
+    throw Exception('Failed to put graduated number.');
   }
 }
-Future<Lab> PostLab(String labnumber , String pcnumber , int id) async {
+Future<Lab> PutLab(int id ,String labnumber , String pcnumber , int id2) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/labs?populate=*';
+  dynamic api = 'https://qms-application.herokuapp.com/api/labs/${id}?populate=*';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -192,7 +191,7 @@ Future<Lab> PostLab(String labnumber , String pcnumber , int id) async {
         "data": {
           "PCnumber":"${pcnumber.toString()}",
           "LabNumber":"${labnumber.toString()}",
-          "MID":id
+          "MID":id2
         }
       })
   );
@@ -201,14 +200,14 @@ Future<Lab> PostLab(String labnumber , String pcnumber , int id) async {
     print(data);
     return Lab.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post lab.');
+    throw Exception('Failed to put lab.');
   }
 }
-Future<StudentActivity> PostStudentActivity(String total , String number ,String percentage, int id) async {
+Future<StudentActivity> PutStudentActivity(int id ,String total , String number ,String percentage, int id2) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/student-activities?populate=*';
+  dynamic api = 'https://qms-application.herokuapp.com/api/student-activities/${id}?populate=*';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -217,7 +216,7 @@ Future<StudentActivity> PostStudentActivity(String total , String number ,String
           "Total":"${total.toString()}",
           "Number":"${number.toString()}",
           "Percentage":percentage,
-          "Year":id
+          "Year":id2
         }
       })
   );
@@ -226,14 +225,14 @@ Future<StudentActivity> PostStudentActivity(String total , String number ,String
     print(data);
     return StudentActivity.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post studentactivity.');
+    throw Exception('Failed to put studentactivity.');
   }
 }
-Future<StudentDistribution> PostStudentDistribution(int year,int level,String male,String female,String cs , String Is,String ai , String ni,String general) async {
+Future<StudentDistribution> PutStudentDistribution(int id,int year,int level,String male,String female,String cs , String Is,String ai , String ni,String general) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/student-distributions?populate=*';
+  dynamic api = 'https://qms-application.herokuapp.com/api/student-distributions/${id}?populate=*';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -266,14 +265,14 @@ Future<StudentDistribution> PostStudentDistribution(int year,int level,String ma
     print(data);
     return StudentDistribution.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post student distribution.');
+    throw Exception('Failed to put student distribution.');
   }
 }
-Future<Surveys> PostSurvey(String Stype) async {
+Future<Surveys> PutSurvey(int id,String Stype) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/surveys';
+  dynamic api = 'https://qms-application.herokuapp.com/api/surveys/${id}';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -288,14 +287,14 @@ Future<Surveys> PostSurvey(String Stype) async {
     print(data);
     return Surveys.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post survey.');
+    throw Exception('Failed to put survey.');
   }
 }
-Future<SurveyItems> PostSurveyItem(String describtion ,int survey) async {
+Future<SurveyItems> PutSurveyItem(int id,String describtion ,int survey) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/survey-items?populate=*';
+  dynamic api = 'https://qms-application.herokuapp.com/api/survey-items/${id}?populate=*';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -312,14 +311,14 @@ Future<SurveyItems> PostSurveyItem(String describtion ,int survey) async {
     print(data);
     return SurveyItems.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post survey items.');
+    throw Exception('Failed to put survey items.');
   }
 }
-Future<StudentTransaction> PostStudentTransaction(int percentage , int year , int survey) async {
+Future<StudentTransaction> PutStudentTransaction(int id ,int percentage , int year , int survey) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/student-transactions?populate=*';
+  dynamic api = 'https://qms-application.herokuapp.com/api/student-transactions/${id}?populate=*';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -337,15 +336,15 @@ Future<StudentTransaction> PostStudentTransaction(int percentage , int year , in
     print(data);
     return StudentTransaction.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post student trasaction.');
+    throw Exception('Failed to put student trasaction.');
   }
 }
 
-Future<Protocol> PostProtocol(String name , int prtocoltype) async {
+Future<Protocol> PutProtocol(int id,String name , int prtocoltype) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/protocols?populate=*';
+  dynamic api = 'https://qms-application.herokuapp.com/api/protocols/${id}?populate=*';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -362,14 +361,14 @@ Future<Protocol> PostProtocol(String name , int prtocoltype) async {
     print(data);
     return Protocol.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post protocol.');
+    throw Exception('Failed to put protocol.');
   }
 }
-Future<Researches> PostResearch(String Rname , int year) async {
+Future<Researches> PutResearch(int id ,String Rname , int year) async {
 
-  dynamic api = 'https://qms-application.herokuapp.com/api/researches?populate=*';
+  dynamic api = 'https://qms-application.herokuapp.com/api/researches/${id}?populate=*';
 
-  final response = await http.post((Uri.parse(api)), headers:<String , String> {
+  final response = await http.put((Uri.parse(api)), headers:<String , String> {
     //'Authorization' : 'xyz',
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -386,7 +385,7 @@ Future<Researches> PostResearch(String Rname , int year) async {
     print(data);
     return Researches.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to post research.');
+    throw Exception('Failed to put research.');
   }
 }
 

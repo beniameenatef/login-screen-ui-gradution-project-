@@ -2,6 +2,7 @@
 import 'package:design_ui/models/studenttransactionmodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,8 @@ class _Mo3amalatALtolapState extends State<Mo3amalatALtolap> {
                           DataColumn(label: Text(' ')),
                           DataColumn(label: Text('الاستطلاع',style: TextStyle(color: AppColors.orange),)),
                           DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Delete'),),
+                          DataColumn(label: Text(' ')),
 
 
 
@@ -88,14 +91,32 @@ class _Mo3amalatALtolapState extends State<Mo3amalatALtolap> {
 
                             DataCell(Container(child: Text('${a}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
-                            DataCell(Container( child: Text("${b}%")),onTap: (){
-
-                            }),
+                            DataCell(Container( child: Text("${b}%"))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                             DataCell(Container(child: Text('${c}'))),
                             DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                            DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: ()
+                            {
 
-                          ]);
+                              setState(() {
+                                DeleteStudentTransaction(snapshot.data!.data![index]!.id);
+                                studenttransaction= GetStudentTransaction();
+
+                              });
+
+
+                            }))),
+                            DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+
+
+                          ],
+                              onLongPress: (){
+                                setState(() {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => AddEditStudentTransactionScreen(object:snapshot.data!.data![index])));
+                                });
+                              }
+                          );
                         }),
                       ),
                     ],

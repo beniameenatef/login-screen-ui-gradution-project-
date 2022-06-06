@@ -8,10 +8,11 @@ import '../../components/text from.dart';
 import '../../constant/colors.dart';
 import '../../models/oneyearmodel.dart';
 import '../../network/http/HttpGet.dart';
+import '../../network/http/HttpPut.dart';
 import '../../network/http/HttpSearch.dart';
 class AddEditGraduatedNumberScreen extends StatefulWidget {
-  const AddEditGraduatedNumberScreen({Key? key}) : super(key: key);
-
+  const AddEditGraduatedNumberScreen({Key? key,  this.object}) : super(key: key);
+  final Datum? object;
   @override
   _AddEditGraduatedNumberScreenState createState() => _AddEditGraduatedNumberScreenState();
 }
@@ -39,6 +40,12 @@ class _AddEditGraduatedNumberScreenState extends State<AddEditGraduatedNumberScr
     super.initState();
     year = GetOneYears();
     graduatednumber =GetGraduatedNumbers();
+     _CSController= TextEditingController(text: widget.object?.attributes?.cs?.number);
+     _ISController= TextEditingController(text: widget.object?.attributes?.attributesIs?.number);
+     _AIController= TextEditingController(text: widget.object?.attributes?.ai?.number);
+     _NIController= TextEditingController(text: widget.object?.attributes?.ni?.number);
+    selectedValue=widget.object?.attributes?.academicYear?.data?.attributes?.year;
+
 
   }
   @override
@@ -56,7 +63,9 @@ class _AddEditGraduatedNumberScreenState extends State<AddEditGraduatedNumberScr
             ),),
           titleSpacing: 0,
 
-          title:Text('أضف الى اعداد الخريجين',style: TextStyle(fontWeight: FontWeight.bold,
+          title:(widget.object?.id == null)? Text('أضف الى اعداد الخريجين',style: TextStyle(fontWeight: FontWeight.bold,
+              color: Color(0xFFF1770D)),):
+          Text('تعديل اعداد الخريجين',style: TextStyle(fontWeight: FontWeight.bold,
               color: Color(0xFFF1770D)),),
         ),
         body: FutureBuilder<Oneyear>(
@@ -197,23 +206,32 @@ class _AddEditGraduatedNumberScreenState extends State<AddEditGraduatedNumberScr
                         ),
                         SizedBox(height: 30,),
                         DefaultButton(
-                          text: 'أضف',
+                          text: (widget.object?.id == null)? 'أضف' : 'تعديل',
                           color: AppColors.blue,
                           onpressed:() {
                             setState(() {
 
                               final FormState? form = formKey.currentState;
-                              if(form!.validate())
-                              {
-                                graduatednumber=PostGraduatedNumber(id!, _CSController.text, _ISController.text, _AIController.text, _NIController.text);
-                                AlertText = 'تم الاضافة';
-                                Navigator.pop(context);
+                              if(widget.object?.id == null){
+                                if(form!.validate())
+                                {
+                                  graduatednumber=PostGraduatedNumber(id!, _CSController.text, _ISController.text, _AIController.text, _NIController.text);
+                                  AlertText = 'تم الاضافة';
+                                  Navigator.pop(context);
 
+                                }
+                                else
+                                {
+                                  AlertText = 'ادخل بعض البيانات';
+                                }
                               }
                               else
-                              {
-                                AlertText = 'ادخل بعض البيانات';
-                              }
+                                {
+                                  graduatednumber=PutGraduatedNumber(widget.object!.id!,id!, _CSController.text, _ISController.text, _AIController.text, _NIController.text);
+                                  AlertText = 'تم التعديل';
+                                  Navigator.pop(context);
+                                }
+
 
                             });
 

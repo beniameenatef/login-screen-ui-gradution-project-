@@ -3,6 +3,7 @@
 import 'package:design_ui/models/graduatednumbrmodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
+import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:flutter/material.dart';
 
@@ -74,12 +75,19 @@ class _a3dadAl5rgeenState extends State<a3dadAl5rgeen> {
                         DataColumn(label: Text(' ')),
                         DataColumn(label: Text('AI')),
                         DataColumn(label: Text(' ')),
-                        DataColumn(label: Text('NI')),
+                        DataColumn(label: Text('NI'),),
+                        DataColumn(label: Text(' ')),
+                        DataColumn(label: Text('Delete'),),
+                        DataColumn(label: Text(' ')),
+
+
+
 
 
 
 
                       ],
+
 
                       rows:
                       List.generate(snapshot.data!.data!.length, (index) {
@@ -101,10 +109,24 @@ class _a3dadAl5rgeenState extends State<a3dadAl5rgeen> {
                           DataCell(Container(child: Text('${a}'))),
                           DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
                           DataCell(Container(child: Text('${b}'))),
+                          DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
+                          DataCell(Container(child: IconButton(icon: Icon(Icons.delete,color: AppColors.blue,), onPressed: () {DeleteGraduatedNumbers(snapshot.data!.data![index].id);  },))),
+                          DataCell(VerticalDivider(thickness: 3.0,color: AppColors.blue,)),
 
 
 
-                        ]);
+
+
+
+                        ],
+
+                        onLongPress: (){
+                          setState(() {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => AddEditGraduatedNumberScreen(object:snapshot.data!.data![index])));
+                          });
+                        }
+                        );
                       }),
                     ),
                   ],
