@@ -88,14 +88,15 @@ class _AddEditMstaffScreenState extends State<AddEditMstaffScreen> {
                   {
                     mstaff = PostMstaff(_NameController.text, _JobController.text);
                     AlertText = 'تم الاضافة';
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => new El3omalelEdareen()))
-                        .then((value) => setState(() {}));
+
                   }
                   else
                   {
                     AlertText = 'ادخل بعض البيانات';
                   }
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => new El3omalelEdareen()))
+                      .then((value) => setState(() {}));
 
                 });
 

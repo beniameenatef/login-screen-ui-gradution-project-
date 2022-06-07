@@ -32,10 +32,10 @@ class _El3omalelEdareenState extends State<El3omalelEdareen> {
         leading:Padding(padding: EdgeInsetsDirectional.only(start: 10),
           child:IconButton(onPressed: ()
           {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) =>  AppDrawer(child:detailshomePage()),
-              ),
+              ),(route) => false,
             );
           },icon: Icon(Icons.arrow_back_ios,color: Color(0xFFF1770D),),
           ),),
@@ -119,8 +119,9 @@ class _El3omalelEdareenState extends State<El3omalelEdareen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddEditMstaffScreen()));
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) => AddEditMstaffScreen()),
+            (route) => false,);
           });    },
         backgroundColor: AppColors.blue,
         child: const Icon(Icons.add),
