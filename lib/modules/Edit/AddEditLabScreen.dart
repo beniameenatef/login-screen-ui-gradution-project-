@@ -43,7 +43,7 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
     _LabNumberController= TextEditingController(text: widget.object?.attributes!.labNumber);
     _PCNumberController= TextEditingController(text: widget.object?.attributes!.pCnumber);
     selectedValue=widget.object?.attributes?.mid?.data?.attributes?.name;
-
+    id = widget.object?.attributes?.mid?.data?.id;
 
   }
   @override
