@@ -9,12 +9,14 @@ import 'package:design_ui/modules/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../network/http/HttpPost.dart';
+
 class regestersocialapp extends StatelessWidget {
 
-  var emailcontroller=TextEditingController();
-  var passwordcontroller=TextEditingController();
-  var namecontroller=TextEditingController();
-  var conformpasswordcontroller=TextEditingController();
+  TextEditingController _emailcontroller=TextEditingController();
+  TextEditingController _passwordcontroller=TextEditingController();
+  TextEditingController _namecontroller=TextEditingController();
+  TextEditingController _conformpasswordcontroller=TextEditingController();
 
   var formkey=GlobalKey<FormState>();
   bool obserText=true;
@@ -54,7 +56,7 @@ class regestersocialapp extends StatelessWidget {
                           const Text('Complete this form',style: TextStyle(fontSize: 20,color: Colors.grey),),
                           const SizedBox(height: 20,),
                           DefaultTextField(
-                            controller:namecontroller ,
+                            controller:_namecontroller ,
                             text: 'User Name',
                             prefix: Icons.drive_file_rename_outline,
 
@@ -68,13 +70,13 @@ class regestersocialapp extends StatelessWidget {
                           ),
                           const SizedBox(height: 20,),
                           DefaultTextField(
-                            controller:emailcontroller ,
+                            controller:_emailcontroller ,
                             text: 'Email',
                             prefix: Icons.email,
 
                             validate:(value){
                               if (value!.isEmpty) {
-                                return ('amail address must not be empty');
+                                return ('email address must not be empty');
                               }
                               return null;
                             },
@@ -86,11 +88,13 @@ class regestersocialapp extends StatelessWidget {
                             validate:(value){
                               if (value!.isEmpty) {
                                 return ('password must not be empty');
+                              }else if(value.length < 6){
+                                return('Password have to be more than 6 characters');
                               }
                               return null;
                             },
                             obserText:obserText ,
-                            controller:passwordcontroller ,
+                            controller:_passwordcontroller ,
                             suffixPressed:(){
 
                               FocusScope.of(context).unfocus();
@@ -105,12 +109,17 @@ class regestersocialapp extends StatelessWidget {
                             prefix: Icons.lock_outline,
                             validate:(value){
                               if (value!.isEmpty) {
-                                return ('Conform password must not be empty');
+                                return ('Confirm password must not be empty');
+
                               }
-                              return null;
+                              else if(_conformpasswordcontroller.text != _passwordcontroller.text){
+                                return("password not matched");
+                              }
+                                return null;
+
                             },
                             obserText:obserText2 ,
-                            controller:conformpasswordcontroller ,
+                            controller:_conformpasswordcontroller ,
                             suffixPressed:(){
                               FocusScope.of(context).unfocus();
                                 obserText2 = !obserText2;
@@ -125,13 +134,16 @@ class regestersocialapp extends StatelessWidget {
                                 color:AppColors.orange ,
                                 text:'REGISTER',
                                 onpressed:()
-                                {
+                                async {
                                   if(formkey.currentState!.validate())
                                   {
-                                    Navigator.push(
+                                    await SignUpUser(_namecontroller.text,_emailcontroller.text,_passwordcontroller.text).
+                                    then((value) => Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) => loginqualityapp()),
+                                    )
                                     );
+
 
                                   }
 

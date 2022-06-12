@@ -8,6 +8,8 @@ import 'package:design_ui/shared/shared%20preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'modules/login/login.dart';
+
 
 
 
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home:
           // years(),
-          AppDrawer(child:detailshomePage()),
+          AppDrawer(child:loginqualityapp()),
         ));
   }
 }

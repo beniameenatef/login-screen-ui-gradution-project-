@@ -12,7 +12,7 @@ import '../../network/http/HttpPut.dart';
 import '../../network/http/HttpSearch.dart';
 class AddEditGraduatedNumberScreen extends StatefulWidget {
   const AddEditGraduatedNumberScreen({Key? key,  this.object}) : super(key: key);
-  final Datum? object;
+  final DatumG? object;
   @override
   _AddEditGraduatedNumberScreenState createState() => _AddEditGraduatedNumberScreenState();
 }

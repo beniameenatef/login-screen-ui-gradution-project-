@@ -14,11 +14,11 @@ class StudentActivity {
     this.meta,
   });
 
-  List<Datum>? data;
+  List<DatumSA>? data;
   Meta? meta;
 
   factory StudentActivity.fromJson(Map<String, dynamic> json) => StudentActivity(
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<DatumSA>.from(json["data"].map((x) => DatumSA.fromJson(x))),
     meta: Meta.fromJson(json["meta"]),
   );
 
@@ -28,8 +28,8 @@ class StudentActivity {
   };
 }
 
-class Datum {
-  Datum({
+class DatumSA {
+  DatumSA({
     this.id,
     this.attributes,
   });
@@ -37,7 +37,7 @@ class Datum {
   int? id;
   DatumAttributes? attributes;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory DatumSA.fromJson(Map<String, dynamic> json) => DatumSA(
     id: json["id"],
     attributes: DatumAttributes.fromJson(json["attributes"]),
   );

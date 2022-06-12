@@ -9,6 +9,8 @@ import 'package:design_ui/models/studentdistribution.dart';
 import 'package:design_ui/models/studenttransactionmodel.dart';
 import 'package:design_ui/models/surveyitemmodel.dart';
 import 'package:design_ui/models/surveymodel.dart';
+import 'package:design_ui/models/userdatamodel.dart';
+import 'package:design_ui/modules/login/userdata.dart';
 import 'package:http/http.dart' as http;
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -17,6 +19,59 @@ import '../../models/bookTypemodel.dart';
 import '../../models/labmodel.dart';
 import '../../models/modelStaff.dart';
 
+Future SignUpUser( String name, String email , String password) async {
+
+  dynamic api = 'https://qms-application.herokuapp.com/api/auth/local/register';
+
+  final response = await http.post(Uri.parse(api),
+      body: {
+          "username": "${name.toString()}",
+          "email": "${email.toString()}",
+          "password": "${password.toString()}"
+      }
+  );
+
+  if (response.statusCode == 200) {
+    print("Account Created");
+    var data = jsonDecode(response.body.toString());
+    print(data["jwt"]);
+  } else {
+    print(response.body);
+    throw Exception('Failed to sign up user.');
+  }
+}
+
+Future<Userdata> LoginUser(String emaill , String password) async {
+
+  dynamic api = 'https://qms-application.herokuapp.com/api/auth/local?populate=*';
+
+  final response = await http.post(Uri.parse(api),
+      body: {
+        "identifier": "${emaill.toString()}",
+        "password": "${password.toString()}"
+      }
+  );
+
+  if (response.statusCode == 200) {
+    print("Account Login in");
+    var data = jsonDecode(response.body.toString());
+    //print(data["jwt"]);
+    jwt = data["jwt"];
+    username=data["user"]["username"];
+    email=data["user"]["email"];
+    //avatar=data["user"]["avatar"];
+    print(jwt);
+    print(username);
+    print(email);
+
+    print(response.body);
+    return Userdata.fromJson(data);
+
+  } else {
+    print(response.body);
+    throw Exception('Failed to log in user.');
+  }
+}
 
 Future<Astaff> PostAstaff( String name, String job) async {
 

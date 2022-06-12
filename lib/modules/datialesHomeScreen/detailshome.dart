@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class detailshomePage extends StatelessWidget {
-  const detailshomePage({Key? key}) : super(key: key);
+  const detailshomePage({Key? key,this.role}) : super(key: key);
+  final String? role;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class detailshomePage extends StatelessWidget {
             elevation: 0,
             bottomOpacity: 0,
             toolbarHeight: 80,
-            leading: IconButton(
+            leading: (role == null)? IconButton(
               color: Color(0xFF2F2F31),
               onPressed: () {
                 print('Presionando');
@@ -32,7 +33,19 @@ class detailshomePage extends StatelessWidget {
                 Icons.menu,
                 size: 30,
               ),
-            ),
+            ):
+            IconButton(
+              color: Color(0xFF2F2F31),
+              onPressed: () {
+                print('guest');
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_sharp,
+                size: 30,
+              ),
+            )
+            ,
             titleSpacing: 0,
             title: Row(
               children: [
@@ -98,8 +111,6 @@ class detailshomePage extends StatelessWidget {
             },
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.feedback), label: 'feedback'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: 'profile'),
               BottomNavigationBarItem(

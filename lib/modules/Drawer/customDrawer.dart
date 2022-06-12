@@ -1,3 +1,4 @@
+import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%A8%D8%AD%D8%A7%D8%AB.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A8%D8%B1%D8%AA%D9%88%D9%83%D9%88%D9%84.dart';
@@ -7,6 +8,7 @@ import 'package:design_ui/modules/ScreenPageDrawer/%D8%AA%D8%AE%D8%B5%D8%B5%20%D
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%B9%D9%86%D8%A7%D8%B5%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D9%85%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D9%86%D8%B4%D8%A7%D8%B7%20%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8.dart';
+import 'package:design_ui/modules/login/userdata.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../ScreenPageDrawer/اعداد الخريجين.dart';
@@ -24,7 +26,8 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return         Material(
+    return WillPopScope(onWillPop: () async => false,
+        child:Material(
       color: Color(0xFF054978),
       child: SafeArea(
         child: Theme(
@@ -41,16 +44,20 @@ class CustomDrawer extends StatelessWidget {
 
 
                     children:
-                    const [
+                     [
                       Padding(padding: EdgeInsetsDirectional.only(
-                          start: 10,top: 30),child:CircleAvatar(
-                        radius: 30,
-
-                      ),),
+                           start: 10,top: 70),
+                        //     child:CircleAvatar(
+                      //   radius: 30,
+                      //
+                      // ),
+                     ),
                       SizedBox(height: 10,),
-                      Text('beniameen',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                      Text('bemiameen11@gmail.com',style:
-                      TextStyle(fontWeight: FontWeight.bold),),
+                       Text('Welcome!',style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.orange,fontSize: 20),),
+                       Text(username.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.orange,fontSize: 20),),
+                      SizedBox(height: 5,),
+                      // Text('${email}',style:
+                      // TextStyle(fontWeight: FontWeight.bold,color: AppColors.orange),),
 
                     ],),
                   SizedBox(height: 20,),
@@ -71,7 +78,7 @@ class CustomDrawer extends StatelessWidget {
                           builder:(context)=>Al3am_Alacademy()));
                     },
                     child: Row( children: const [
-                      Text('االعام الاكاديمي ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      Text('العام الاكاديمي ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                       // MyAppp(),
                     ],),),
                   SizedBox(height: 15,),
@@ -87,7 +94,7 @@ class CustomDrawer extends StatelessWidget {
                     },
                     child: Row(
                       children: const [
-                      Text('العمال الاكادميين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                      Text('اعضاء هيئة التدريس',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                     ],),),
                   SizedBox(height: 15,),
                   InkWell(
@@ -101,23 +108,10 @@ class CustomDrawer extends StatelessWidget {
                     },
                     child: Row(
                       children: const [
-                        Text('العمال الاداريين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                        Text(' الاداريين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                       ],),),
                   SizedBox(height: 15,),
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Alaksam(),
-                        ),
-                      );
-
-                    },
-                    child: Row( children: [
-                      Text('الاقسام ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
 
                   InkWell(
                     onTap: (){
@@ -245,19 +239,6 @@ class CustomDrawer extends StatelessWidget {
                     onTap: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Ta5sosAltolap(),
-                        ),
-                      );
-                    },
-                    child: Row( children: const [
-                      Text('تخصص الطلاب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
-
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
                         MaterialPageRoute(builder: (context) => Alab7as(),
                         ),
                       );
@@ -316,7 +297,13 @@ class CustomDrawer extends StatelessWidget {
                   SizedBox(height: 30,),
 
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      username=null;
+                      email=null;
+                      jwt=null;
+
+                      Navigator.pop(context);
+                    },
                     child: Row( children: [
                       Text('    Sign Out ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                       Icon(Icons.logout)
@@ -329,6 +316,7 @@ class CustomDrawer extends StatelessWidget {
             )),
         ),
       ),
+    )
     );
 
   }

@@ -4,16 +4,20 @@ import 'package:design_ui/components/passwordtextform.dart';
 import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/components/custom%20button.dart';
 import 'package:design_ui/components/text%20from.dart';
+import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/login/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../network/http/HttpPost.dart';
+import '../datialesHomeScreen/detailshome.dart';
+
 class loginqualityapp extends StatelessWidget {
   var formkey = GlobalKey<FormState>();
-  var emaillogincontroller = TextEditingController();
-  var passwordlogincontroller = TextEditingController();
+  TextEditingController emaillogincontroller = TextEditingController();
+  TextEditingController passwordlogincontroller = TextEditingController();
   bool obserText = true;
 
   @override
@@ -86,7 +90,7 @@ class loginqualityapp extends StatelessWidget {
                                 prefix: Icons.email,
                                 validate: (value) {
                                   if (value!.isEmpty) {
-                                    return ('amail address must not be empty');
+                                    return ('email address must not be empty');
                                   }
                                   return null;
                                 },
@@ -143,12 +147,13 @@ class loginqualityapp extends StatelessWidget {
                                   child: DefaultButton(
                                 text: 'Login',
                                 color: AppColors.orange,
-                                onpressed: () {
+                                onpressed: () async {
                                   if (formkey.currentState!.validate()) {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => homescreen()),
-                                    // );
+                                    await LoginUser(emaillogincontroller.text,passwordlogincontroller.text).then((value) =>
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => AppDrawer(child: detailshomePage())),
+                                    ));
 
                                   }
                                 },
@@ -160,7 +165,12 @@ class loginqualityapp extends StatelessWidget {
                                   child: DefaultButton(
                                 text: 'Guest User',
                                 color: AppColors.blue,
-                                onpressed: () {},
+                                onpressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => detailshomePage(role:"guest")),
+                                  );
+                                },
                               )),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
