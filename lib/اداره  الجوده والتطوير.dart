@@ -108,8 +108,6 @@ class adaretalgouda extends StatelessWidget {
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.feedback), label: 'feedback'),
-              BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: 'profile'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.settings), label: 'settings'),

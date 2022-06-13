@@ -262,18 +262,6 @@ class CustomDrawer extends StatelessWidget {
                     ],),),
                   SizedBox(height: 15,),
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => No3Alprotocol(),
-                        ),
-                      );
-                    },
-                    child: Row( children: const [
-                      Text('نوع البرتوكول',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 20,),
                   Container(
                     width: 400,
                     height: 1,
