@@ -12,6 +12,7 @@ import 'package:design_ui/models/studentactivitymodel.dart';
 import 'package:design_ui/models/studentdistribution.dart';
 import 'package:design_ui/models/studenttransactionmodel.dart';
 import 'package:design_ui/models/surveymodel.dart';
+import 'package:design_ui/models/userdatamodel.dart';
 import 'package:design_ui/models/yearsmodel.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,6 +21,19 @@ import '../../models/Research.dart';
 import '../../models/surveyitemmodel.dart';
 import '../../modules/Drawer/yeardropdwon.dart';
 
+Future<List<Users>> GetUser() async {
+  final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/users'));
+
+  if(response.statusCode==200){
+    print(response.body);
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((data) => new Users.fromJson(data)).toList();
+  }
+  else
+  {
+    throw Exception('failed to get user data');
+  }
+}
 Future<Year> GetYears() async {
   final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/academic-years?populate=deep,3'));
 

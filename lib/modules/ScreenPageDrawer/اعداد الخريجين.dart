@@ -83,51 +83,46 @@ class a3dadAl5rgeen extends StatelessWidget {
                               ],
                               rows: List.generate(snapshot.data!.data!.length,
                                       (index) {
-                                    final x = snapshot
-                                        .data!
-                                        .data![index]
-                                        .attributes!
-                                        .academicYear!
-                                        .data!
-                                        .attributes!
-                                        .year
-                                        .toString();
+                                    dynamic x = snapshot.data?.data?[index]?.attributes?.academicYear?.data?.attributes?.Year.toString();
                                     dynamic y = snapshot
-                                        .data!.data![index].attributes!.cs!.number
+                                        .data!.data![index]!.attributes!.CS!.Number
                                         .toString();
                                     dynamic z = snapshot.data!.data![index]
-                                        .attributes!.attributesIs!.number
+                                        ?.attributes!.IS!.Number
                                         .toString();
                                     dynamic a = snapshot
-                                        .data!.data![index].attributes!.ai!.number
+                                        .data!.data![index]!.attributes!.AI!.Number
                                         .toString();
                                     dynamic b = snapshot
-                                        .data!.data![index].attributes!.ni!.number
+                                        .data!.data![index]!.attributes!.NI!.Number
                                         .toString();
+                                    (x == null )? print(''):print(x);
+
+
 
                                     return DataRow(
                                         cells: [
-                                          DataCell(Container(child: Text("${x}"))),
+                                          DataCell(Container(child: (x==null)? Text("0"):Text("${x}"))),
                                           const DataCell(VerticalDivider(
                                             thickness: 3.0,
                                             color: AppColors.blue,
                                           )),
-                                          DataCell(Container(child: Text('${y}'))),
+                                          DataCell(Container(child:(y==null)? Text("0"): Text('${y}'))),
                                           const DataCell(VerticalDivider(
                                             thickness: 3.0,
                                             color: AppColors.blue,
                                           )),
-                                          DataCell(Container(child: Text("${z}"))),
+                                          DataCell(Container(child: (z==null)? Text("0"):Text("${z}"))),
                                           const DataCell(VerticalDivider(
                                             thickness: 3.0,
                                             color: AppColors.blue,
                                           )),
-                                          DataCell(Container(child: Text('${a}'))),
+                                          DataCell(Container(child:(a==null)? Text("0"): Text('${a}'))),
                                           const DataCell(VerticalDivider(
                                             thickness: 3.0,
                                             color: AppColors.blue,
                                           )),
-                                          DataCell(Container(child: Text('${b}'))),
+                                          DataCell(Container(child: (b==null)? Text("0"):Text('${b}'))),
                                           const DataCell(VerticalDivider(
                                             thickness: 3.0,
                                             color: AppColors.blue,
@@ -143,7 +138,7 @@ class a3dadAl5rgeen extends StatelessWidget {
                                                       .get(context)
                                                       .DeleteGraduatedNumbers(
                                                       id: snapshot
-                                                          .data!.data![index].id);
+                                                          .data!.data![index]?.id);
                                                 },
                                               ))),
                                           const DataCell(VerticalDivider(

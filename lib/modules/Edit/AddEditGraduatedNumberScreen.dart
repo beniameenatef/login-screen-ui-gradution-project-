@@ -15,7 +15,7 @@ import '../ScreenPageDrawer/اعداد الخريجين.dart';
 
 class AddEditGraduatedNumberScreen extends StatefulWidget {
   const AddEditGraduatedNumberScreen({Key? key, this.object}) : super(key: key);
-  final DatumG? object;
+  final GraduatedNumberData? object;
 
   @override
   _AddEditGraduatedNumberScreenState createState() =>
@@ -43,15 +43,15 @@ class _AddEditGraduatedNumberScreenState
     year = GetOneYears();
     graduatednumber = GetGraduatedNumbers();
     _CSController =
-        TextEditingController(text: widget.object?.attributes?.cs?.number);
+        TextEditingController(text: widget.object?.attributes!.CS!.Number);
     _ISController = TextEditingController(
-        text: widget.object?.attributes?.attributesIs?.number);
+        text: widget.object?.attributes?.IS!.Number);
     _AIController =
-        TextEditingController(text: widget.object?.attributes?.ai?.number);
+        TextEditingController(text: widget.object?.attributes!.AI!.Number);
     _NIController =
-        TextEditingController(text: widget.object?.attributes?.ni?.number);
+        TextEditingController(text: widget.object?.attributes!.NI!.Number);
     selectedValue =
-        widget.object?.attributes?.academicYear?.data?.attributes?.year;
+        widget.object?.attributes?.academicYear?.data?.attributes!.Year;
     id =widget.object?.attributes?.academicYear?.data?.id;
   }
 
@@ -141,6 +141,7 @@ class _AddEditGraduatedNumberScreenState
                                     onChanged: (value) {
                                       setState(() {
                                         selectedValue = value as String;
+
 
                                         Future<int> data =
                                         SearchOneYear(value.toString());

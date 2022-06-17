@@ -27,7 +27,10 @@ Future SignUpUser( String name, String email , String password) async {
       body: {
           "username": "${name.toString()}",
           "email": "${email.toString()}",
-          "password": "${password.toString()}"
+          "password": "${password.toString()}",
+          "visible":"guest"
+
+
       }
   );
 
@@ -41,7 +44,7 @@ Future SignUpUser( String name, String email , String password) async {
   }
 }
 
-Future<Userdata> LoginUser(String emaill , String password) async {
+Future<Users> LoginUser(String emaill , String password) async {
 
   dynamic api = 'https://qms-application.herokuapp.com/api/auth/local?populate=*';
 
@@ -59,13 +62,14 @@ Future<Userdata> LoginUser(String emaill , String password) async {
     jwt = data["jwt"];
     username=data["user"]["username"];
     email=data["user"]["email"];
+    role=data["user"]["visible"];
     //avatar=data["user"]["avatar"];
     print(jwt);
     print(username);
     print(email);
 
     print(response.body);
-    return Userdata.fromJson(data);
+    return Users.fromJson(data);
 
   } else {
     print(response.body);

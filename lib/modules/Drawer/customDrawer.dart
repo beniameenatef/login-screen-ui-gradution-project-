@@ -70,197 +70,308 @@ class CustomDrawer extends StatelessWidget {
 
                   ),
                   SizedBox(height: 15,),
-                  InkWell(
-                    onTap: (){
-                      //MyStatefulWidget();
+                  Visibility(
+                    visible: (role == 'creator1'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        //MyStatefulWidget();
 
-                      Navigator.push(context, MaterialPageRoute(
-                          builder:(context)=>Al3am_Alacademy()));
-                    },
-                    child: Row( children: const [
-                      Text('العام الاكاديمي ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                      // MyAppp(),
-                    ],),),
-                  SizedBox(height: 15,),
+                        Navigator.push(context, MaterialPageRoute(
+                            builder:(context)=>Al3am_Alacademy()));
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('العام الاكاديمي ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                            // MyAppp(),
+                          ],),
+                          SizedBox(height: 15,),
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AL3omal(),
-                        ),
-                      );
+                        ],
+                      ),),
+                  ),
 
-                    },
-                    child: Row(
-                      children: const [
-                      Text('اعضاء هيئة التدريس',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => El3omalelEdareen(),
-                        ),
-                      );
+                  Visibility(
+                    visible: (role == 'creator1'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AL3omal(),
+                          ),
+                        );
 
-                    },
-                    child: Row(
-                      children: const [
-                        Text(' الاداريين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                      ],),),
-                  SizedBox(height: 15,),
+                      },
+                      child: Column(
+                        children: [
+                          Row(
+                            children: const [
+                            Text('اعضاء هيئة التدريس',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
 
+                        ],
+                      ),),
+                  ),
+                  Visibility(
+                    visible: (role == 'creator1'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => El3omalelEdareen(),
+                          ),
+                        );
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Alma3amel(),
-                        ),
-                      );
+                      },
+                      child: Column(
+                        children: [
+                          Row(
+                            children: const [
+                              Text(' الاداريين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                            ],),
+                          SizedBox(height: 15,),
 
-                    },
-                    child: Row( children: [
-                      Text('المعامل ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
-
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Tawzee3Altolap(),
-                        ),
-                      );
-
-                    },
-                    child: Row( children: [
-                      Text('توزيع الطلاب ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
-
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => NashatAtolap(),
-                        ),
-                      );
-                    },
-                    child: Row( children: const [
-                      Text('نشاط الطلاب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Anwa3elkotb(),
-                        ),
-                      );
-                    },
-                    child: Row( children: const [
-                      Text(' أنواع الكتب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                        ],
+                      ),),
+                  ),
 
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Almaktba(),
-                        ),
-                      );
-                    },
-                    child: Row( children: const [
-                      Text(' المكتبة',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                  Visibility(
+                    visible: (role == 'creator1'|| role =='admin')? true : false,
 
-                  InkWell(
-                    onTap: ()
-                    {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => a3dadAl5rgeen(),
-                        ),
-                      );
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Alma3amel(),
+                          ),
+                        );
 
-                    },
-                    child: Row( children: const [
-                      Text('اعداد الخرجين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: [
+                            Text('المعامل ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+                        ],
+                      ),),
+                  ),
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Alasttla3at(),
-                        ),
-                      );
-                    },
-                    child: Row( children: const [
-                      Text('الاستطلاعات',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                  Visibility(
+                    visible: (role == 'creator1'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Tawzee3Altolap(),
+                          ),
+                        );
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => anaserAlasttla3at(),
-                        ),
-                      );
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: [
+                            Text('توزيع الطلاب ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
 
-                    },
-                    child: Row( children: const [
-                      Text('عناصر الاستطلاعات',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                        ],
+                      ),),
+                  ),
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Mo3amalatALtolap(),
-                        ),
-                      );
+                  Visibility(
+                    visible: (role == 'creator1'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => NashatAtolap(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('نشاط الطلاب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+                  ),
+                  Visibility(
+                    visible: (role == 'creator1'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Anwa3elkotb(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text(' أنواع الكتب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+                  ),
+                  Visibility(
+                    visible: (role == 'creator1')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Almaktba(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text(' المكتبة',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+                  ),
+
+                  Visibility(
+                    visible: (role == 'creator2'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: ()
+                      {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => a3dadAl5rgeen(),
+                          ),
+                        );
+
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('اعداد الخرجين',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+                  ),
+
+                  Visibility(
+                    visible: (role == 'creator2'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Alasttla3at(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('الاستطلاعات',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+
+                  ),
+
+                  Visibility(
+                    visible: (role == 'creator2'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => anaserAlasttla3at(),
+                          ),
+                        );
+
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('عناصر الاستطلاعات',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+                  ),
+
+                  Visibility(
+                    visible: (role == 'creator2'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mo3amalatALtolap(),
+                          ),
+                        );
          },
-                    child: Row( children: const [
-                      Text('معاملات الطلاب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('معاملات الطلاب',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Alab7as(),
-                        ),
-                      );
+                        ],
+                      ),),
+                  ),
 
-                    },
-                    child: Row( children: const [
-                      Text('الابحاث',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                  Visibility(
+                    visible: (role == 'creator2'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Alab7as(),
+                          ),
+                        );
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Alprotocol(),
-                        ),
-                      );
-                    },
-                    child: Row( children: const [
-                      Text('البرتوكول',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                    ],),),
-                  SizedBox(height: 15,),
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('الابحاث',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+                  ),
+
+                  Visibility(
+                    visible: (role == 'creator2'|| role =='admin')? true : false,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Alprotocol(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Row( children: const [
+                            Text('البرتوكول',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                          ],),
+                          SizedBox(height: 15,),
+
+                        ],
+                      ),),
+                  ),
 
                   Container(
                     width: 400,

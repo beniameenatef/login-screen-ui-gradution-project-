@@ -343,14 +343,11 @@ class _HomeoverviewState extends State<Homeoverview> {
 
                       rows:
                       List.generate(snapshot.data![6].data!.length, (index) {
-                        final x = snapshot.data![6].data![index].attributes!
-                            .academicYear!.data!.attributes!.year.toString();
+                        final x = snapshot.data![6].data?[index]?.attributes?.academicYear?.data?.attributes?.Year.toString();
                         dynamic y = int.parse(
-                            snapshot.data![6].data![index].attributes!.cs!
-                                .number);
+                            snapshot.data?[6]?.data?[index]?.attributes?.CS?.Number);
                         dynamic z = int.parse(
-                            snapshot.data![6].data![index].attributes!
-                                .attributesIs!.number);
+                            snapshot.data?[6]?.data?[index]?.attributes?.IS?.Number);
 
 
                         return DataRow(cells: [

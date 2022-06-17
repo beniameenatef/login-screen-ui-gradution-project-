@@ -52,7 +52,7 @@ class _HomechartsState extends State<Homecharts> {
               //   return data;
               // });
               // print(data);
-              List<DatumG> grad=snapshot.data![0]!.data;
+              List<GraduatedNumberData> grad=snapshot.data![0]!.data;
               List<Datum> library=snapshot.data![1]!.data;
               List<Datumlab> lab=snapshot.data![2]!.data;
               List<YearData> year=snapshot.data![3].data;
@@ -83,35 +83,35 @@ class _HomechartsState extends State<Homecharts> {
                         legend: Legend(isVisible: true),
                         // Enable tooltip
                         tooltipBehavior: TooltipBehavior(enable: true),
-                        series: <ChartSeries<DatumG, String>>[
-                          LineSeries<DatumG, String>(
+                        series: <ChartSeries<GraduatedNumberData, String>>[
+                          LineSeries<GraduatedNumberData, String>(
                               dataSource: grad,
-                              xValueMapper: (DatumG num, _) => num.attributes!.academicYear!.data!.attributes!.year,
-                              yValueMapper: (DatumG num, _) => int.parse(num.attributes!.cs!.number.toString()),
+                              xValueMapper: (GraduatedNumberData num, _) => (num.attributes?.academicYear?.data?.attributes?.Year==null)? '0':num.attributes?.academicYear?.data?.attributes?.Year,
+                              yValueMapper: (GraduatedNumberData num, _) => (num.attributes?.CS?.Number==null)? 0:int.parse(num.attributes!.CS!.Number.toString()),
 
                               name: 'CS student',
                               // Enable data label
                               dataLabelSettings: DataLabelSettings(isVisible: true)),
-                          LineSeries<DatumG, String>(
+                          LineSeries<GraduatedNumberData, String>(
                               dataSource: grad,
-                              xValueMapper: (DatumG num, _) => num.attributes!.academicYear!.data!.attributes!.year,
-                              yValueMapper: (DatumG num, _) => int.parse(num.attributes!.attributesIs!.number.toString()),
+                              xValueMapper: (GraduatedNumberData num, _) => (num.attributes?.academicYear?.data?.attributes?.Year==null)? '0':num.attributes!.academicYear!.data!.attributes!.Year,
+                              yValueMapper: (GraduatedNumberData num, _) => (num.attributes?.IS?.Number==null)? 0:int.parse(num.attributes!.IS!.Number.toString()),
 
                               name: 'IS student',
                               // Enable data label
                               dataLabelSettings: DataLabelSettings(isVisible: true)),
-                          LineSeries<DatumG, String>(
+                          LineSeries<GraduatedNumberData, String>(
                               dataSource: grad,
-                              xValueMapper: (DatumG num, _) => num.attributes!.academicYear!.data!.attributes!.year,
-                              yValueMapper: (DatumG num, _) => int.parse(num.attributes!.ai!.number.toString()),
+                              xValueMapper: (GraduatedNumberData num, _) => (num.attributes?.academicYear?.data?.attributes?.Year==null)? '0':num.attributes!.academicYear!.data!.attributes!.Year,
+                              yValueMapper: (GraduatedNumberData num, _) => (num.attributes?.AI?.Number==null)? 0:int.parse(num.attributes!.AI!.Number.toString()),
 
                               name: 'AI student',
                               // Enable data label
                               dataLabelSettings: DataLabelSettings(isVisible: true)),
-                          LineSeries<DatumG, String>(
+                          LineSeries<GraduatedNumberData, String>(
                               dataSource: grad,
-                              xValueMapper: (DatumG num, _) => num.attributes!.academicYear!.data!.attributes!.year,
-                              yValueMapper: (DatumG num, _) => int.parse(num.attributes!.ni!.number.toString()),
+                              xValueMapper: (GraduatedNumberData num, _) => (num.attributes?.academicYear?.data?.attributes?.Year==null)? '0':num.attributes!.academicYear!.data!.attributes!.Year,
+                              yValueMapper: (GraduatedNumberData num, _) => (num.attributes?.NI?.Number==null)? 0:int.parse(num.attributes!.NI!.Number.toString()),
 
                               name: 'NI student',
                               // Enable data label
@@ -212,56 +212,56 @@ class _HomechartsState extends State<Homecharts> {
                       series: <ChartSeries<YearData, String>>[
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Male.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' : num.attributes?.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Male.toString()),
 
                             name: 'male student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Female!.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Female!.toString()),
 
                             name: 'female student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.CS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.CS!.Number.toString()),
 
                             name: 'CS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.IS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.IS!.Number.toString()),
 
                             name: 'IS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.AI!.Number.toString()),
+                            xValueMapper: (YearData num, _) =>(num.attributes?.Year==null)? '0' : num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.AI!.Number.toString()),
 
                             name: 'AI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.NI!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.NI!.Number.toString()),
 
                             name: 'NI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.General!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.General!.Number.toString()),
 
                             name: 'General student',
                             // Enable data label
@@ -287,56 +287,56 @@ class _HomechartsState extends State<Homecharts> {
                       series: <ChartSeries<YearData, String>>[
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Male.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Male.toString()),
 
                             name: 'male student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Female!.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes!.studentDistributions!.data![1]!.attributes!.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Female!.toString()),
 
                             name: 'female student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.CS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.CS!.Number.toString()),
 
                             name: 'CS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.IS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.IS!.Number.toString()),
 
                             name: 'IS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.AI!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.AI!.Number.toString()),
 
                             name: 'AI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.NI!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.NI!.Number.toString()),
 
                             name: 'NI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.General!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.General!.Number.toString()),
 
                             name: 'General student',
                             // Enable data label
@@ -362,56 +362,56 @@ class _HomechartsState extends State<Homecharts> {
                       series: <ChartSeries<YearData, String>>[
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Male.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes!.studentDistributions!.data![2]!.attributes!.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Male.toString()),
 
                             name: 'male student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Female!.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes!.studentDistributions!.data![2]!.attributes!.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Female!.toString()),
 
                             name: 'female student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.CS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.CS!.Number.toString()),
 
                             name: 'CS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.IS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.IS!.Number.toString()),
 
                             name: 'IS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.AI!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.AI!.Number.toString()),
 
                             name: 'AI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.NI!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.NI!.Number.toString()),
 
                             name: 'NI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.General!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.General!.Number.toString()),
 
                             name: 'General student',
                             // Enable data label
@@ -437,56 +437,56 @@ class _HomechartsState extends State<Homecharts> {
                       series: <ChartSeries<YearData, String>>[
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Male.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Male.toString()),
 
                             name: 'male student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year.toString(),
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Female!.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Female!.toString()),
 
                             name: 'female student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.CS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.CS!.Number.toString()),
 
                             name: 'CS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.IS!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.IS!.Number.toString()),
 
                             name: 'IS student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.AI!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.AI!.Number.toString()),
 
                             name: 'AI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.NI!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.NI!.Number.toString()),
 
                             name: 'NI student',
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(isVisible: true)),
                         LineSeries<YearData, String>(
                             dataSource: year,
-                            xValueMapper: (YearData num, _) => num.attributes!.Year,
-                            yValueMapper: (YearData num, _) => int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.General!.Number.toString()),
+                            xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
+                            yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.General!.Number.toString()),
 
                             name: 'General student',
                             // Enable data label
